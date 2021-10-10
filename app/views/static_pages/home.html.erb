@@ -1,0 +1,23 @@
+<body>
+  <% if logged_in? %>
+    <h1>user/showの個別ページを表示</h1>
+  <% else %>
+    <div class="container" style="margin-top: 15px">
+      <div class="jumbotron">
+        <h1 class="display-4">アプリ名</h1>
+        <p class="lead">キャッチフレーズ</p>
+        <p>イメージ画像の表示</p>
+        <hr class="my-4">
+        <ul>
+          <li>アプリの説明①</li>
+          <li>アプリの説明①</li>
+          <li>アプリの説明①</li>
+        </ul>
+      </div>
+      <button><%= link_to "新規登録", u_new_path, class: "nav-item nav-link" %></button>
+      <br>
+      <button><%= link_to "ログイン", login_path, class: "nav-item nav-link" %></button>
+      <p></p>
+    </div>
+  <% end %>
+</body>

@@ -1,0 +1,28 @@
+<div class="container" style="margin-top: 15px">
+    <h1><%= @current_user.nickname %>の詳細ページ</h1>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+      <%= render 'follow_form' if logged_in? %>
+    </section>
+    <h2>投稿一覧</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">title</th>
+          <th scope="col">created</th>
+          <th scope="col">updated</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.posts.each do |post| %>
+        <tr>
+          <th scope="row"><%= post.id %></th>
+          <th><%= link_to post.title, p_show_path(post.id) %></td>
+          <td><%= post.created_at %></td>
+          <td><%= post.updated_at %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+      </div>

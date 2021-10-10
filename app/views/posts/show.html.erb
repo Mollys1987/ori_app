@@ -1,0 +1,18 @@
+<div class="container" style="margin-top: 15px">
+  <div class="card">
+    <div class="card-header">
+      <%= @post.id %>
+    </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p><%= @post.content %></p>
+      <%= image_tag @post.picture.url if @post.picture? %>
+      <footer class="blockquote-footer">created_at: <cite title="Source Title"><%= @post.created_at %></cite></footer>
+    </blockquote>
+  </div>
+    <% if current_user?(@post.user) %>
+      <%= link_to "edit", p_edit_path(@post.id) %>
+      <%= link_to "delete", p_des_path(@post.id), method: :delete %>
+    <% end %>
+  </div>
+</div>
