@@ -25,7 +25,7 @@ class PostsController < ApplicationController
   def show
     p 'show_start========================='
     @post = Post.find(params[:id])
-  
+    @like = Like.new
     p 'end========================='
   end
   

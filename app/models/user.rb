@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :posts
   # 削除機能をつけたらユーザー削除とともにポストも削除
   # has_many :posts, dependent: :destroy
+  has_many :direct_messages
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
@@ -10,6 +11,8 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
   
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
@@ -60,5 +63,8 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def already_liked?(post)
+    self.likes.exists?(post_id: post.id)
+  end
 
 end

@@ -11,24 +11,24 @@
       <%= f.text_field :nickname, class: 'form-control' %>
     </div>
     
-    <!--<div class="form-group">-->
-    <!--  <label>年代</label><br>-->
-    <!--  <label><%= f.radio_button :age, "10s" %>10代</label>-->
-    <!--  <label><%= f.radio_button :age, "20s" %>20代</label>-->
-    <!--  <label><%= f.radio_button :age, "30s" %>30代</label>-->
-    <!--  <label><%= f.radio_button :age, "40s" %>40代</label>-->
-    <!--  <label><%= f.radio_button :age, "50s" %>50代</label>-->
-    <!--  <label><%= f.radio_button :age, "60s" %>60代</label>-->
-    <!--  <label><%= f.radio_button :age, "70s" %>70代</label>-->
-    <!--  <label><%= f.radio_button :age, "80s" %>80代</label>-->
-    <!--  <label><%= f.radio_button :age, "90s" %>90代</label>-->
-    <!--</div>-->
+    <div class="form-group">
+      <label>年代</label><br>
+      <label><%= f.radio_button :age, "10s" %>10代</label>
+      <label><%= f.radio_button :age, "20s" %>20代</label>
+      <label><%= f.radio_button :age, "30s" %>30代</label>
+      <label><%= f.radio_button :age, "40s" %>40代</label>
+      <label><%= f.radio_button :age, "50s" %>50代</label>
+      <label><%= f.radio_button :age, "60s" %>60代</label>
+      <label><%= f.radio_button :age, "70s" %>70代</label>
+      <label><%= f.radio_button :age, "80s" %>80代</label>
+      <label><%= f.radio_button :age, "90s" %>90代</label>
+    </div>
     
-    <!--<div class="form-group">-->
-    <!--  <label>性別</label><br>-->
-    <!--  <label><%= f.radio_button :sex, "men" %>男性</label>-->
-    <!--  <label><%= f.radio_button :sex, "fimale" %>女性</label>-->
-    <!--</div>-->
+    <div class="form-group">
+      <label>性別</label><br>
+      <label><%= f.radio_button :sex, "men" %>男性</label>
+      <label><%= f.radio_button :sex, "fimale" %>女性</label>
+    </div>
     
     <div class="form-group">
       <%= f.label :prefucture, value="住所（都道府県）" %>
@@ -40,26 +40,26 @@
       <%= f.text_field :city, class: 'form-control' %>
     </div>
     
-    <!--<div class="form-group">-->
-    <!--  <label>分類</label><br>-->
-    <!--  <label><%= f.radio_button :type, "介護者" %>介護者</label>-->
-    <!--  <label><%= f.radio_button :type, "被介護者" %>被介護者</label>-->
-    <!--  <label><%= f.radio_button :type, "医療職" %>医療職</label>-->
-    <!--</div>-->
+    <div class="form-group">
+      <label>分類</label><br>
+      <label><%= f.radio_button :classification, "介護者" %>介護者</label>
+      <label><%= f.radio_button :classification, "被介護者" %>被介護者</label>
+      <label><%= f.radio_button :classification, "医療職" %>医療職</label>
+    </div>
     
-    <!--<div class="form-group">-->
-    <!--  <label>介護の対象</label><br>-->
-    <!--  <label><%= f.radio_button :type, "実父" %>実父</label>-->
-    <!--  <label><%= f.radio_button :type, "実母" %>実母</label>-->
-    <!--  <label><%= f.radio_button :type, "義父" %>義父</label>-->
-    <!--  <label><%= f.radio_button :type, "義母" %>義母</label>-->
-    <!--  <label><%= f.radio_button :type, "祖父" %>祖父</label>-->
-    <!--  <label><%= f.radio_button :type, "祖母" %>祖母</label>-->
-    <!--  <label><%= f.radio_button :type, "兄弟姉妹" %>兄弟姉妹</label>-->
-    <!--  <label><%= f.radio_button :type, "親戚" %>親戚</label>-->
-    <!--  <label><%= f.radio_button :type, "その他" %>その他</label>-->
-    <!--  <label><%= f.radio_button :type, "なし" %>なし</label>-->
-    <!--</div>-->
+    <div class="form-group">
+      <label>介護の対象</label><br>
+      <label><%= f.radio_button :nursing, "実父" %>実父</label>
+      <label><%= f.radio_button :nursing, "実母" %>実母</label>
+      <label><%= f.radio_button :nursing, "義父" %>義父</label>
+      <label><%= f.radio_button :nursing, "義母" %>義母</label>
+      <label><%= f.radio_button :nursing, "祖父" %>祖父</label>
+      <label><%= f.radio_button :nursing, "祖母" %>祖母</label>
+      <label><%= f.radio_button :nursing, "兄弟姉妹" %>兄弟姉妹</label>
+      <label><%= f.radio_button :nursing, "親戚" %>親戚</label>
+      <label><%= f.radio_button :nursing, "その他" %>その他</label>
+      <label><%= f.radio_button :classification, "なし" %>なし</label>
+    </div>
     
     <div class="form-group">
       <%= f.label :status, value="現状（プロフィール）" %>

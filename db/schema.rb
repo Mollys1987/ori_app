@@ -10,15 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_10_151542) do
+ActiveRecord::Schema.define(version: 2021_10_12_120033) do
 
-  create_table "messeages", force: :cascade do |t|
-    t.text "messege"
-    t.integer "sender_id"
-    t.integer "receiver_id"
+  create_table "direct_messages", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.integer "to_user_id"
     t.datetime "to_user_opentime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -53,12 +62,12 @@ ActiveRecord::Schema.define(version: 2021_10_10_151542) do
     t.string "sex"
     t.string "prefucture"
     t.string "city"
-    t.string "type"
     t.string "status"
     t.string "key_word1"
     t.string "key_word2"
     t.string "key_word3"
     t.string "nursing"
+    t.string "classification"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

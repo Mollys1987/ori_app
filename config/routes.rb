@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get  'post_edit/:id',  to: 'posts#edit',   as: 'p_edit'
   patch  'post_update/:id',    to: 'posts#update',  as: 'p_up'
   delete 'post_delete/:id',    to: 'posts#destroy', as: 'p_des'
+  resources :posts do
+    resources :likes, only: [:create, :destroy]
+  end
   
   get  'user/new',       to: 'users#new',    as: 'u_new'
   post 'user/create',    to: 'users#create', as: 'u_create'
@@ -28,4 +31,8 @@ Rails.application.routes.draw do
   end
   
   resources :relationships,       only: [:create, :destroy]
+
+  get 'direct_messages/index/:id',              to:  'direct_messages#index'
+  get 'direct_messages/:user_id/:to_user_id',   to:  'direct_messages#roomshow'
+  resources :direct_messages
 end
