@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   
     default_scope -> { order(created_at: :desc) }
     mount_uploader :picture, PictureUploader
+    mount_uploader :video, VideoUploader
     validates :title, presence: true, length: { maximum: 50 }
     validates :content, presence: true, length: { maximum: 255 }
     validates :user_id, presence: true

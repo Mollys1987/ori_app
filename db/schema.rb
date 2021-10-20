@@ -33,11 +33,13 @@ ActiveRecord::Schema.define(version: 2021_10_12_120033) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "picture"
-    t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
+    t.string "video"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_posts_on_created_at"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -51,23 +53,23 @@ ActiveRecord::Schema.define(version: 2021_10_12_120033) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "password_digest"
-    t.string "remember_digest"
-    t.string "nickname"
     t.string "name"
+    t.string "nickname"
     t.string "age"
     t.string "sex"
     t.string "prefucture"
     t.string "city"
+    t.string "classification"
+    t.string "nursing"
     t.string "status"
     t.string "key_word1"
     t.string "key_word2"
     t.string "key_word3"
-    t.string "nursing"
-    t.string "classification"
+    t.string "password_digest"
+    t.string "remember_digest"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

@@ -7,8 +7,8 @@
     <section class="stats">
     <h3>いいねしている投稿</h3>
       <% @user.liked_posts.each do |post| %>
-        <%= post.user.email %>
-        <%= post.content %>
+        <%= link_to post.user.nickname, u_show_path(post.user.id) %>
+        <%= link_to post.content, p_show_path(post.id)%>
       <% end %>
     </section>
 <h2>投稿一覧</h2>

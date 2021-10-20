@@ -8,9 +8,14 @@
         <%= f.text_field :content, class: 'form-control' %>
         
         <span class="picture">
+         <%= f.label :"写真" %>
          <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
         </span>
         <br>
+        <span class="video">
+         <%= f.label :"動画" %>
+         <%= f.file_field :video, :accept => 'video/*' %>
+        </span>
         <br>
         <%= f.submit "投稿", class: "btn btn-primary btn-lg btn-lg"%>
         

@@ -7,6 +7,10 @@
     <blockquote class="blockquote mb-0">
       <p><%= @post.content %></p>
       <%= image_tag @post.picture.url if @post.picture? %>
+      <%= link_to @post.video_url.to_s do %>
+       <%= video_tag(@post.video.to_s, width: "100%", height: "100%") %>
+      <% end %>
+      
       <footer class="blockquote-footer">created_at: <cite title="Source Title"><%= @post.created_at %></cite></footer>
     </blockquote>
   </div>
@@ -17,12 +21,12 @@
   </div>
   <h3>いいね件数: <%= @post.likes.count %></h3>
     <% if current_user.already_liked?(@post) %>
-      <%= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
+      <%= button_to '取り消し', post_like_path(@post), method: :delete %>
     <% else %>
       <%= button_to 'いいね', post_likes_path(@post) %>
     <% end %>
     <h2>いいねしたユーザー</h2>
     <% @post.liked_users.each do |user| %>
-      <li><%= user.email %></li>
+      <li><%= user.nickname %></li>
     <% end %>
 </div>
