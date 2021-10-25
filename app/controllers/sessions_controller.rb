@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   
   def create
     user = User.find_by(nickname: params[:session][:nickname])
-    if user && user.authenticate(params[:session][:password])
+    if user && user.authenticate(params[:session][:password][:answer])
       log_in user
       remember(user)
       redirect_to p_index_path

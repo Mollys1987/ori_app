@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash[:success] = "Micropost created!"
+      flash[:success] = "投稿成功しました"
       redirect_to p_index_path
     else
       render :new
@@ -26,6 +26,9 @@ class PostsController < ApplicationController
     p 'show_start========================='
     @post = Post.find(params[:id])
     @like = Like.new
+    @comments = @post.comments
+    @comment = Comment.new
+    @reply = Reply.new
     p 'end========================='
   end
   

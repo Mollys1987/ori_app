@@ -7,9 +7,13 @@ Rails.application.routes.draw do
   get  'post_edit/:id',  to: 'posts#edit',   as: 'p_edit'
   patch  'post_update/:id',    to: 'posts#update',  as: 'p_up'
   delete 'post_delete/:id',    to: 'posts#destroy', as: 'p_des'
+  post  'posts/:post_id/comment',    to: 'comments#create', as: 'p_com'
+  post  'posts/:user_id/comment/:comment_id', to: 'replies#create', as: 'reply'
+  post  'posts/:user_id/reply/:reply_id',     to: 'replies#re_rep', as: 'r_reply'
   resources :posts do
     resources :likes, only: [:create, :destroy]
   end
+  
   resources :relationships,       only: [:create, :destroy]
   
   get  'user/new',       to: 'users#new',    as: 'u_new'
@@ -28,9 +32,9 @@ Rails.application.routes.draw do
   post   '/login',         to: 'sessions#create'
   delete '/logout',        to: 'sessions#destroy'
 
-  get 'direct_messages/index/:id',              to:  'direct_messages#index'
-  get 'direct_messages/:user_id/:to_user_id',   to:  'direct_messages#roomshow'
-  resources :direct_messages
+  get  'messages/index/:id',                 to: 'messages#index',    as: 'm_index'
+  get  'messages/room/:user_id/:to_user_id', to: 'messages#roomshow', as: 'room'
+  post 'send',                               to: 'messages#create',   as: 'send'
 
   get 'search_func', to: 'search#search',  as: 'search_func'
 

@@ -1,32 +1,112 @@
 <div class="container" style="margin-top: 15px">
   <div class="card">
     <div class="card-header">
-      <%= @post.id %>
+      <% if @post.user.profile_image? %>
+            <%= image_tag @post.user.profile_image.url, class: "icon_size" %>
+          <% else %>
+            <i class="fas fa-user fa-3x"></i>
+          <% end %>
+      <%= @post.user.nickname %>
     </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p><%= @post.content %></p>
-      <%= image_tag @post.picture.url if @post.picture? %>
+      <%= image_tag(@post.picture.url, width: "80%", margin: "0 auto") if @post.picture? %>
       <%= link_to @post.video_url.to_s do %>
-       <%= video_tag(@post.video.to_s, width: "100%", height: "100%") %>
+       <%= video_tag(@post.video.to_s, width: "100%", height: "100%") if @post.video?%>
       <% end %>
-      
-      <footer class="blockquote-footer">created_at: <cite title="Source Title"><%= @post.created_at %></cite></footer>
+      <p><%= @post.content %></p>
+      <footer class="blockquote-footer">作成時間: <i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %>前</footer>
     </blockquote>
   </div>
     <% if current_user?(@post.user) %>
-      <%= link_to "edit", p_edit_path(@post.id) %>
-      <%= link_to "delete", p_des_path(@post.id), method: :delete %>
+    <div class="edit_delete">
+      <%= link_to "投稿の編集", p_edit_path(@post.id) %>
+      <%= link_to "投稿の削除", p_des_path(@post.id), method: :delete %>
+    </div>
     <% end %>
   </div>
-  <h3>いいね件数: <%= @post.likes.count %></h3>
     <% if current_user.already_liked?(@post) %>
       <a href="/posts/<%= @post.id %>/likes/<%= current_user.id%>" data-method="delete"><i class="fas fa-heart"></i>取り消し</a>
     <% else %>
       <a href="/posts/<%= @post.id %>/likes" data-method="post"><i class="far fa-heart"></i>お気に入り</a>
     <% end %>
-    <h2>いいねしたユーザー</h2>
-    <% @post.liked_users.each do |user| %>
-      <li><%= user.nickname %></li>
-    <% end %>
+    <button id="comment" class="hide_btn"><i class="far fa-comments"></i>コメントする</button>
+    
+    <h2>コメント一覧</h2>
+      <% if @comments.presence %>
+        <div class="card">
+          <% @comments.each do |c| %>
+            <div class="card-header">
+              <% if c.user.profile_image? %>
+                <%= image_tag c.user.profile_image.url, class: "icon_size" %>
+              <% else %>
+                <i class="fas fa-user fa-3x"></i>
+              <% end %>
+              <a href="/users/<%= @post.user.id %>"><%= c.user.nickname %></a>
+            </div>
+            <div class="card-body">
+              <%= c.content %>
+            </div>
+            <button id="reply" class="hide_btn">コメントに返信する</button>
+              <div id="reply_form">
+                <%= form_for(@reply, url: reply_path(comment_id: c.id, user_id: current_user.id)) do |f| %>
+                  <%= f.text_field :re_comment %>
+                  <br>
+                  <%= f.submit 'コメントに返信する' %>
+                <% end %>
+              </div>
+                <% if c.replies.presence %>
+                  <div class="card">
+                    <% c.replies.each do |rep| %>
+                      <div class="card-header">
+                        <% if rep.user.profile_image? %>
+                          <%= image_tag rep.user.profile_image.url, class: "icon_size" %>
+                        <% else %>
+                          <i class="fas fa-user fa-3x"></i>
+                        <% end %>
+                        <a href="/users/<%= @post.user.id %>"><%= rep.user.nickname %></a>
+                      </div>
+                      <div class="card-body">
+                        <%= rep.re_comment %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <button id="reply" class="hide_btn">コメントに返信する</button>
+                    <div id="reply_form">
+                      <%= form_for(@reply, url: reply_path(comment_id: c.id, user_id: current_user.id)) do |f| %>
+                        <%= f.text_field :re_comment %>
+                        <br>
+                        <%= f.submit 'コメントに返信する' %>
+                      <% end %>
+                    </div>
+                <% end %>
+                
+        <% end %>
+        </div>
+      <% else %>
+        まだコメントがありません。
+      <% end %>
+    
+    <div id="comment_form" class="card my-1"> 
+      <div class="card-body">
+        <p class="font-weight-bold">投稿へのコメント</p>
+        <%= form_for(@comment, url: p_com_path(@post.id)) do |f| %>
+          <%= f.text_field :content %>
+          <br>
+          <%= f.submit 'コメントする' %>
+        <% end %>
+      </div>
+    </div>
 </div>
+
+
+
+<script>
+  $('#comment').click(function() {
+        $('#comment_form').fadeIn();
+    })
+    
+  $('#reply').click(function() {
+        $('#reply_form').fadeIn();
+    })
+</script>

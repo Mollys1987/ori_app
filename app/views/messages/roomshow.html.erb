@@ -1,0 +1,41 @@
+<h1><%= @to_user.nickname %>さんとのメッセージページ</h1>
+
+<% if @messages.any? %>
+  <% @user.messages.each do |message| %>
+    <div class="right">
+      <% if @user.profile_image? %>
+        <%= image_tag @user.profile_image.url, class: "icon_size" %>
+      <% else %>
+        <i class="fas fa-user fa-3x"></i>
+      <% end %>
+      <%= @user.nickname %>
+      <br>
+      <%= message.content %>
+      <br>
+      <%= message.created_at%>
+    </div>
+      <% @to_user.messages.each do |re_message| %>
+        <div class="left">
+          <% if @to_user.profile_image? %>
+            <%= image_tag @to_user.profile_image.url, class: "icon_size" %>
+          <% else %>
+            <i class="fas fa-user fa-3x"></i>
+          <% end %>
+          <%= @to_user.nickname %>
+          <br>
+          <%= re_message.content %>
+          <br>
+          <%= re_message.created_at%>
+        </div>
+      <% end %>
+  <% end %>
+<% end %>
+
+  <%= form_for(@message, url: send_path) do |form| %>
+    <%= form.text_area :content, id: "content", rows: "4", class: "form_textarea mb-4" %>
+    <%= form.text_field :user_id, class: "hidden hide", value: current_user.id %>
+    <%= form.text_field :to_user_id, class: "hidden hide", value: @to_user.id %>
+    <%= form.submit "メッセージ送信", class: "btn_01" %>
+  <% end %>
+    
+    

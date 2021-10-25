@@ -85,3 +85,32 @@ nav {
   width: auto;
   height: 50px;
 }
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.edit_delete {
+  text-align: right;
+  margin-right: 5%;
+}
+
+#comment_form {
+  display: none;
+}
+
+.hide_btn {
+  border: none;
+  background-color: none;
+  color: none;
+}
+
+#reply_form {
+  display: none;
+}
