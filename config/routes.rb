@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :likes, only: [:create, :destroy]
   end
+  resources :relationships,       only: [:create, :destroy]
   
   get  'user/new',       to: 'users#new',    as: 'u_new'
   post 'user/create',    to: 'users#create', as: 'u_create'
@@ -17,22 +18,20 @@ Rails.application.routes.draw do
   get  'user/show/:id',      to: 'users#show',   as: 'u_show'
   get  'user/edit',      to: 'users#edit',   as: 'u_edit'
   patch'user/update',    to: 'users#update', as: 'u_up'
-  
-  get    '/login',         to: 'sessions#new'
-  post   '/login',         to: 'sessions#create'
-  delete '/logout',        to: 'sessions#destroy'
-  
-  # get  '/user/:id/following',  to: 'users#following',  as: 'following_user_path'
-  # get  '/user/:id/followers',  to: 'users#followers',  as: 'followers_user_path'
   resources :users do
     member do
       get :following, :followers
     end
   end
   
-  resources :relationships,       only: [:create, :destroy]
+  get    '/login',         to: 'sessions#new'
+  post   '/login',         to: 'sessions#create'
+  delete '/logout',        to: 'sessions#destroy'
 
   get 'direct_messages/index/:id',              to:  'direct_messages#index'
   get 'direct_messages/:user_id/:to_user_id',   to:  'direct_messages#roomshow'
   resources :direct_messages
+
+  get 'search_func', to: 'search#search',  as: 'search_func'
+
 end

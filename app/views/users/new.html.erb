@@ -1,10 +1,6 @@
 <div class="container" style="margin-top: 15px">
   <%= form_for(@user, url: u_create_path) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <!--<div class="form-group">-->
-    <!--  <%= f.label :name, value="名前" %>-->
-    <!--  <%= f.text_field :name, class: 'form-control' %>-->
-    <!--</div>-->
     
     <div class="form-group">
       <%= f.label :nickname, value="ニックネーム（アプリに表示される名前）" %>
@@ -40,12 +36,12 @@
     
     <div class="form-group hide open">
       <%= f.label :prefucture, value="住所（都道府県）" %>
-      <%= f.text_field :prefucture, class: 'form-control' %>
+      <%= f.text_field :prefucture, id: 'pref', class: 'form-control', placeholder: '郵便番号から自動入力' %>
     </div>
     
     <div class="form-group hide open">
       <%= f.label :city, value="住所（市町村）" %>
-      <%= f.text_field :city, class: 'form-control' %>
+      <%= f.text_field :city, id: 'city', class: 'form-control', placeholder: '郵便番号から自動入力' %>
     </div>
     
     <div class="form-group">
@@ -66,12 +62,12 @@
       <label><%= f.radio_button :nursing, "兄弟姉妹" %>兄弟姉妹</label>
       <label><%= f.radio_button :nursing, "親戚" %>親戚</label>
       <label><%= f.radio_button :nursing, "その他" %>その他</label>
-      <label><%= f.radio_button :classification, "なし" %>なし</label>
+      <label><%= f.radio_button :nursing, "なし" %>なし</label>
     </div>
     
     <div class="form-group">
       <%= f.label :status, value="現状（プロフィール）" %>
-      <%= f.text_area :status, class: 'form-control' %>
+      <%= f.text_area :status, class: 'form-control', rows: "5" %>
     </div>
     
     <div class="form-group">
@@ -88,12 +84,7 @@
       <%= f.label :key_word3, value="情報交換したい項目" %>
       <%= f.text_field :key_word3, class: 'form-control' %>
     </div>
-    
-    <div class="form-group">
-      <%= f.label :Email %>
-      <%= f.email_field :email, class: 'form-control' %>
-    </div>
-    
+  
     <div class="form-group">
       <%= f.label :Password %>
       <%= f.password_field :password, class: 'form-control' %>
@@ -103,6 +94,12 @@
       <%= f.label :Password_confirmation %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
+    
+    <%= f.label :profile_image, value="プロフィール画像"%>
+    <br>
+    <%= f.file_field :profile_image, accept: 'image/jpeg,image/gif,image/png' %>
+    <br>
+    <br>
     
     <%= f.submit "新規登録", class: "btn btn-primary btn-lg" %>
   <% end %>
@@ -131,7 +128,6 @@ $(function(){
   function getData(data) {
     $('#pref').val(data.address1);
     $('#city').val(data.address2);
-    $('#address').val(data.address3);
   }
 });
 </script>

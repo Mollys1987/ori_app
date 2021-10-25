@@ -1,4 +1,31 @@
-User.create!(email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             admin: true)
+User.create!(nickname: "ステイサム",
+            age: "50s",
+            sex: "men",
+            prefucture: "ハリウッド",
+            city: "ビバリーヒルズ",
+            classification: "医療者",
+            nursing: "実母",
+            status: "テスト",
+            key_word1: "介護疲れ",
+            key_word2: "腰痛",
+            key_word3: "認知症",
+            password:              "asdfghjkl",
+            password_confirmation: "asdfghjkl",
+            answer_digest: "ハム"
+            )
+
+User.create!(nickname: "ますお",
+            age: "30s",
+            sex: "men",
+            prefucture: "東京都",
+            city: "世田谷区",
+            classification: "介護者",
+            nursing: "義父",
+            status: "テスト２",
+            key_word1: "介護疲れ",
+            key_word2: "腰痛",
+            key_word3: "認知症",
+            password:              "asdfghjkl",
+            password_confirmation: "asdfghjkl",
+            answer_digest: "カレー"
+            )

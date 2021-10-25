@@ -2,24 +2,25 @@
   <%= form_for(:session, url: login_path) do |f| %>
     
     <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.label :ニックネーム %>
+      <%= f.text_field :nickname, class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :password %>
+      <%= f.label :パスワード %>
       <%= f.password_field :password, class: 'form-control' %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
-      <% end %>
-    </div>
+    <!--<div class="form-group">-->
+    <!--  <%= f.label :remember_me, class: "checkbox inline" do %>-->
+    <!--    <%= f.check_box :remember_me %>-->
+    <!--    <span>Remember me on this computer</span>-->
+    <!--  <% end %>-->
+    <!--</div>-->
 
-      <%= f.submit "Log in", class: "btn btn-primary btn-lg" %>
+      <%= f.submit "ログイン", class: "btn btn-primary btn-lg" %>
   <% end %>
 
-  <p>New user? <%= link_to "Sign up now!", u_new_path %></p>
+  <h2>まだ登録していない</h2>
+  <%= link_to "新規登録", u_new_path %>
 </div>

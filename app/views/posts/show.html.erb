@@ -21,9 +21,9 @@
   </div>
   <h3>いいね件数: <%= @post.likes.count %></h3>
     <% if current_user.already_liked?(@post) %>
-      <%= button_to '取り消し', post_like_path(@post), method: :delete %>
+      <a href="/posts/<%= @post.id %>/likes/<%= current_user.id%>" data-method="delete"><i class="fas fa-heart"></i>取り消し</a>
     <% else %>
-      <%= button_to 'いいね', post_likes_path(@post) %>
+      <a href="/posts/<%= @post.id %>/likes" data-method="post"><i class="far fa-heart"></i>お気に入り</a>
     <% end %>
     <h2>いいねしたユーザー</h2>
     <% @post.liked_users.each do |user| %>

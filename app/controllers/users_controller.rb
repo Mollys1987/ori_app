@@ -11,7 +11,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      remember(@user)
+      flash[:success] = "登録が完了しました"
       redirect_to p_index_path
     else
       render :new
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(current_user.id)
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "プロフィールを更新しました"
       redirect_to u_show_path(current_user.id)
     else
       render 'edit'
@@ -60,10 +61,11 @@ class UsersController < ApplicationController
   
   private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, 
-                                   :nickname, :name, :age, :sex, :prefucture,
-                                   :city, :type, :status, :key_word1, :key_word2,
-                                   :key_word3, :nursing)
+      params.require(:user).permit(:nickname, :age, :sex, :prefucture,
+                                   :city, :classification, :nursing, :status,
+                                   :key_word1, :key_word2, :key_word3,
+                                   :password, :password_confirmation,
+                                   :answer, :answer_digest, :profile_image)
     end
     
     def correct_user

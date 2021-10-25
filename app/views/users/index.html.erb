@@ -3,19 +3,24 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">email</th>
-      <th scope="col">created</th>
-      <th scope="col">updated</th>
+      <th scope="col"> </th>
+      <th scope="col">ニックネーム</th>
+      <th scope="col">居住エリア</th>
+      <th scope="col">分類</th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
     <tr>
-      <th scope="row"><%= user.id %></th>
-      <th><%= link_to user.email, u_show_path(user.id) %></td>
-      <td><%= user.created_at %></td>
-      <td><%= user.updated_at %></td>
+      <td><% if user.profile_image? %>
+            <%= image_tag user.profile_image.url, class: "icon_size" %>
+          <% else %>
+            <i class="fas fa-user fa-3x"></i>
+          <% end %>
+      </td>
+      <td><%= link_to user.nickname, u_show_path(user.id) %></td>
+      <td><%= user.prefucture %></td>
+      <td><%= user.classification %></td>
     </tr>
     <% end %>
   </tbody>  

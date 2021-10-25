@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_12_120033) do
-
-  create_table "direct_messages", force: :cascade do |t|
-    t.text "content"
-    t.integer "user_id"
-    t.integer "to_user_id"
-    t.datetime "to_user_opentime"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2021_10_25_023208) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "post_id"
@@ -28,6 +19,17 @@ ActiveRecord::Schema.define(version: 2021_10_12_120033) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id"
+    t.integer "to_user_id"
+    t.datetime "to_user_opentime"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["to_user_id"], name: "index_messages_on_to_user_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -52,8 +54,19 @@ ActiveRecord::Schema.define(version: 2021_10_12_120033) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "replies", force: :cascade do |t|
+    t.string "reply"
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.integer "reply_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_replies_on_comment_id"
+    t.index ["reply_id"], name: "index_replies_on_reply_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "name"
     t.string "nickname"
     t.string "age"
     t.string "sex"
@@ -65,12 +78,12 @@ ActiveRecord::Schema.define(version: 2021_10_12_120033) do
     t.string "key_word1"
     t.string "key_word2"
     t.string "key_word3"
+    t.string "profile_image"
     t.string "password_digest"
+    t.string "answer_digest"
     t.string "remember_digest"
-    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

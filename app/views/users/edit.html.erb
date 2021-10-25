@@ -1,9 +1,81 @@
 <div class="container" style="margin-top: 15px">
   <%= form_for(@user, url: u_up_path) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
+    
     <div class="form-group">
-      <%= f.label :Email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= f.label :nickname, value="ニックネーム（アプリに表示される名前）" %>
+      <%= f.text_field :nickname, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <label>年代</label><br>
+      <label><%= f.radio_button :age, "10s" %>10代</label>
+      <label><%= f.radio_button :age, "20s" %>20代</label>
+      <label><%= f.radio_button :age, "30s" %>30代</label>
+      <label><%= f.radio_button :age, "40s" %>40代</label>
+      <label><%= f.radio_button :age, "50s" %>50代</label>
+      <label><%= f.radio_button :age, "60s" %>60代</label>
+      <label><%= f.radio_button :age, "70s" %>70代</label>
+      <label><%= f.radio_button :age, "80s" %>80代</label>
+      <label><%= f.radio_button :age, "90s" %>90代</label>
+    </div>
+    
+    <div class="form-group">
+      <label>性別</label>
+      <br>
+      <label><%= f.radio_button :sex, "men" %>男性</label>
+      <label><%= f.radio_button :sex, "fimale" %>女性</label>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :prefucture, value="住所（都道府県）" %>
+      <%= f.text_field :prefucture, id: 'pref', class: 'form-control', placeholder: '郵便番号から自動入力' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :city, value="住所（市町村）" %>
+      <%= f.text_field :city, id: 'city', class: 'form-control', placeholder: '郵便番号から自動入力' %>
+    </div>
+    
+    <div class="form-group">
+      <label>分類</label><br>
+      <label><%= f.radio_button :classification, "介護者" %>介護者</label>
+      <label><%= f.radio_button :classification, "被介護者" %>被介護者</label>
+      <label><%= f.radio_button :classification, "医療職" %>医療職</label>
+    </div>
+    
+    <div class="form-group">
+      <label>介護の対象</label><br>
+      <label><%= f.radio_button :nursing, "実父" %>実父</label>
+      <label><%= f.radio_button :nursing, "実母" %>実母</label>
+      <label><%= f.radio_button :nursing, "義父" %>義父</label>
+      <label><%= f.radio_button :nursing, "義母" %>義母</label>
+      <label><%= f.radio_button :nursing, "祖父" %>祖父</label>
+      <label><%= f.radio_button :nursing, "祖母" %>祖母</label>
+      <label><%= f.radio_button :nursing, "兄弟姉妹" %>兄弟姉妹</label>
+      <label><%= f.radio_button :nursing, "親戚" %>親戚</label>
+      <label><%= f.radio_button :nursing, "その他" %>その他</label>
+      <label><%= f.radio_button :nursing, "なし" %>なし</label>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :status, value="現状（プロフィール）" %>
+      <%= f.text_area :status, class: 'form-control', rows: "5" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :key_word1, value="情報交換したい項目" %>
+      <%= f.text_field :key_word1, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :key_word2, value="情報交換したい項目" %>
+      <%= f.text_field :key_word2, class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :key_word3, value="情報交換したい項目" %>
+      <%= f.text_field :key_word3, class: 'form-control' %>
     </div>
     
     <div class="form-group">
@@ -16,6 +88,12 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
     
-    <%= f.submit "Save changes", class: "btn btn-primary btn-lg" %>
+    <%= f.label :profile_image, value="プロフィール画像"%>
+    <br>
+    <%= f.file_field :profile_image, accept: 'image/jpeg,image/gif,image/png' %>
+    <br>
+    <br>
+    
+    <%= f.submit "プロフィールを更新します", class: "btn btn-primary btn-lg" %>
   <% end %>
 </div>
