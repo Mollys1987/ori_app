@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    @user.answer_digest = BCrypt::Password.create(params[:user][:answer_digest])
     if @user.save
       log_in @user
       remember(@user)
@@ -64,8 +65,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:nickname, :age, :sex, :prefucture,
                                    :city, :classification, :nursing, :status,
                                    :key_word1, :key_word2, :key_word3,
-                                   :password, :password_confirmation,
-                                   :answer, :answer_digest, :profile_image)
+                                   :answer_digest, :profile_image)
     end
     
     def correct_user

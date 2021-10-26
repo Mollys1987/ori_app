@@ -86,19 +86,11 @@
     </div>
   
     <div class="form-group">
-      <%= f.label :answer_digest %>
-      <%= f.password_field :answer_digest, class: 'form-control' %>
+      <%= f.label :answer_digest, value="好きな食べ物" %>※ログインに必要な質問の答え 
+      <%= f.text_field :answer_digest, class: 'form-control' %>
     </div>
   
-    <div class="form-group">
-      <%= f.label :Password %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label :Password_confirmation %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
+   
     
     <%= f.label :profile_image, value="プロフィール画像"%>
     <br>

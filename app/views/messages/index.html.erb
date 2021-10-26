@@ -20,9 +20,11 @@
     </table>
  
  <h2>メッセージ履歴</h2>
+ 
+   
   <% @message_user_ids.each do |message_user_id|
     message_user = User.find_by(id: message_user_id)  %>
-      <% if message_user.present? %>
+      <% if message_user.presence %>
         <a href="/messages/room/<%= current_user.id %>/<%= message_user.id %>">
           <div class="border-b border-gray-200 flex py-4 bg-white items-center">
             <div class="w-10 h-10 mr-4">

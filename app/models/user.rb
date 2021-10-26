@@ -19,8 +19,7 @@ class User < ApplicationRecord
   validates :nickname, presence: true, length: { maximum: 255 },
                        uniqueness: true
                     
-  has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  
   validates :answer_digest, presence: true
   mount_uploader :profile_image, ProfileImageUploader
   

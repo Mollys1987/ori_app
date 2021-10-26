@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
       p'1========='
       @user = User.find_by(id: params[:id])
       p'2=========='
+      @meesages = Message.where(user_id: current_user.id)
       @message_user_ids = Message.where(to_user_id: @user.id).or(Message.where(user_id: @user.id)).distinct.pluck(:user_id)
       p'3============='
       @message_user_ids.delete(@user.id)
