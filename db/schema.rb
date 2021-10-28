@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_10_25_040555) do
   end
 
   create_table "replies", force: :cascade do |t|
-    t.string "reply"
+    t.string "re_comment"
     t.integer "user_id"
     t.integer "comment_id"
     t.integer "reply_id"

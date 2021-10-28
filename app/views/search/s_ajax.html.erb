@@ -1,0 +1,31 @@
+    <input type="text" name="nickname" id="nickname" />
+    <button id="search_nickname">検索</button>
+    <div id="search_result"></div>
+  
+<script>
+$(document).on('turbolinks:load', (function(){
+      $('#search_nickname').click(function(){
+        let email = $('#nickname').val();
+        $.ajax({
+          type: 'GET',
+          url: '/result',
+          data: {search: nickname},
+          dataType: 'json'
+        })
+        .done(function(data){
+          $('#search_result').append('<table id="table_nickname"></table>');
+          $.each(data.users, function(index,val){
+            $('#table_nickname').append(
+              $('<thead></thead>')
+              .append('<tr></tr>')
+              .append('<th>検索結果</th>')
+              .append('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append(`<td>${val.nickname}</td>`)
+            )
+          })
+          console.log(data.users)
+        })
+      })
+    }))
+</script>

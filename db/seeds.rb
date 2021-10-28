@@ -9,9 +9,8 @@ User.create!(nickname: "ステイサム",
             key_word1: "介護疲れ",
             key_word2: "腰痛",
             key_word3: "認知症",
-            password:              "asdfghjkl",
-            password_confirmation: "asdfghjkl",
-            answer_digest: "ハム"
+            
+            answer_digest: "カレー"
             )
 
 User.create!(nickname: "ますお",
@@ -25,7 +24,13 @@ User.create!(nickname: "ますお",
             key_word1: "介護疲れ",
             key_word2: "腰痛",
             key_word3: "認知症",
-            password:              "asdfghjkl",
-            password_confirmation: "asdfghjkl",
+            
             answer_digest: "カレー"
             )
+            
+20.times do |n|
+    User.create!(
+      nickname: "テストユーザー#{n + 1}",
+      answer_digest: "カレー"
+    )
+  end

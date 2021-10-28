@@ -11,4 +11,16 @@ class SearchController < ApplicationController
       # flash[:notice] = "一致する結果がありません"
     end
   end
+  
+  def s_ajax
+    
+  end
+  
+  def result
+    @users = User.where('nickname LIKE ?', "%#{params[:nickname]}%")
+    respond_to do |format|
+      format.json { render json: {users: @users} }
+    end
+  end
+  
 end

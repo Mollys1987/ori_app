@@ -37,5 +37,6 @@ Rails.application.routes.draw do
   post 'send',                               to: 'messages#create',   as: 'send'
 
   get 'search_func', to: 'search#search',  as: 'search_func'
-
+  get 's_ajax', to: 'search#s_ajax', as: 's2'
+  get 'result', to: 'search#result'
 end

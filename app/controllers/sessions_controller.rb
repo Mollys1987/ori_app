@@ -3,21 +3,23 @@ class SessionsController < ApplicationController
   end
   
   def create
-    p'1==========='
-    user = User.find_by(nickname: params[:session][:nickname])
-    p'2============='
-    login_result = BCrypt::Password.new(user.answer_digest).is_password?(params[:session][:answer_digest])
-    p'3==============='
+    p'1====================='
+    if params[:session][:answer_digest] && params[:session][:nickname].presence
+    p'2====================='
+      user = User.find_by(nickname: params[:session][:nickname])
+    p'3====================='
+      login_result = BCrypt::Password.new(user.answer_digest).is_password?(params[:session][:answer_digest])
+    end
+    p'5====================='
     if user && login_result
-    p'4================'
+      p'6====================='
       log_in user
-    p'5=============='
       remember(user)
-    p'6================'
       redirect_to p_index_path
     else
       p'7====================='
-      flash.now[:danger] = 'ニックネームまたは質問の答えが間違っています'
+      flash.now[:danger] = '未入力または入力内容が間違っています'
+      p'8====================='
       render 'new'
     end
   end
