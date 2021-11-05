@@ -95,6 +95,8 @@
     <%= f.label :profile_image, value="プロフィール画像"%>
     <br>
     <%= f.file_field :profile_image, accept: 'image/jpeg,image/gif,image/png' %>
+    
+      <%= f.file_field :profile_image, value: 'icon.png', class: 'hide', accept: 'image/jpeg,image/gif,image/png' %>
     <br>
     <br>
     

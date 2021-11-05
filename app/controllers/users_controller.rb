@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
   
   def create
+    p params
     @user = User.new(user_params)
     @user.answer_digest = BCrypt::Password.create(params[:user][:answer_digest])
     if @user.save

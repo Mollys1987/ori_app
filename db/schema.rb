@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_040555) do
+ActiveRecord::Schema.define(version: 2021_10_29_080644) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -35,13 +35,13 @@ ActiveRecord::Schema.define(version: 2021_10_25_040555) do
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id"
-    t.integer "to_user_id"
-    t.datetime "to_user_opentime"
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "receiver_opentime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["to_user_id"], name: "index_messages_on_to_user_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -50,6 +50,11 @@ ActiveRecord::Schema.define(version: 2021_10_25_040555) do
     t.integer "user_id"
     t.string "picture"
     t.string "video"
+    t.string "key_word1"
+    t.string "key_word2"
+    t.string "key_word3"
+    t.string "key_word4"
+    t.string "key_word5"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_at"], name: "index_posts_on_created_at"
@@ -76,6 +81,15 @@ ActiveRecord::Schema.define(version: 2021_10_25_040555) do
     t.index ["comment_id"], name: "index_replies_on_comment_id"
     t.index ["reply_id"], name: "index_replies_on_reply_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_rooms_on_receiver_id"
+    t.index ["sender_id"], name: "index_rooms_on_sender_id"
   end
 
   create_table "users", force: :cascade do |t|

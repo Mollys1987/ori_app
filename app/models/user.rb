@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
+  has_many :rooms
   has_many :messages
   has_many :comments
   has_many :replies, class_name: 'Reply', foreign_key: :user_id, dependent: :destroy

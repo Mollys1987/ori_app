@@ -9,7 +9,6 @@ User.create!(nickname: "ステイサム",
             key_word1: "介護疲れ",
             key_word2: "腰痛",
             key_word3: "認知症",
-            
             answer_digest: "カレー"
             )
 
@@ -24,7 +23,6 @@ User.create!(nickname: "ますお",
             key_word1: "介護疲れ",
             key_word2: "腰痛",
             key_word3: "認知症",
-            
             answer_digest: "カレー"
             )
             

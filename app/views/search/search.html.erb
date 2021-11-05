@@ -2,6 +2,7 @@
   <button id="c_btn">居住エリア検索</button>
   <button id="key_btn">情報交換キーワード検索</button>
   <button id="title_btn">投稿のタイトル検索</button>
+  <button id="p_search_btn">投稿の検索キーワード検索</button>
   
   <div id="u_search" class="hide">
     <input type="text" name="nickname" placeholder="ニックネームを入力" id="nickname" />
@@ -27,11 +28,18 @@
     <div id="title_result"></div>
   </div>
   
+  <div id="p_search" class="hide">
+    <input type="text" name="p_key" placeholder="投稿の検索キーワードを入力" id="p_key" />
+    <button id="search_p_key">検索</button>
+    <div id="p_key_result"></div>
+  </div>
+  
 <script>
 $('#u_btn').click(function() {
         $('#c_search').fadeOut();
         $('#key_search').fadeOut();
         $('#title_search').fadeOut();
+        $('#p_search').fadeOut();
         $('#u_search').fadeIn();
     })
     
@@ -39,6 +47,7 @@ $('#c_btn').click(function() {
         $('#u_search').fadeOut();
         $('#key_search').fadeOut();
         $('#title_search').fadeOut();
+        $('#p_search').fadeOut();
         $('#c_search').fadeIn();
     })
   
@@ -46,6 +55,7 @@ $('#key_btn').click(function() {
         $('#u_search').fadeOut();
         $('#c_search').fadeOut();
         $('#title_search').fadeOut();
+        $('#p_search').fadeOut();
         $('#key_search').fadeIn();
     })
 
@@ -53,9 +63,17 @@ $('#title_btn').click(function() {
         $('#u_search').fadeOut();
         $('#c_search').fadeOut();
         $('#key_search').fadeOut();
+        $('#p_search').fadeOut();
         $('#title_search').fadeIn();
     })
-
+    
+$('#p_search_btn').click(function() {
+        $('#u_search').fadeOut();
+        $('#c_search').fadeOut();
+        $('#key_search').fadeOut();
+        $('#title_search').fadeOut();
+        $('#p_search').fadeIn();
+    })
 
 $(document).on('turbolinks:load', (function(){
       $('#search_nickname').click(function(){
@@ -77,11 +95,10 @@ $(document).on('turbolinks:load', (function(){
               $('<tbody></tbody>')
               .append('<tr></tr>')
               .append('<tr></tr>')
-              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`)
-            
+              .append(prof_pic(val))
             )
           })
-          console.log(data.users)
+          console.log(data.users);
         })
       })
     }))
@@ -106,14 +123,23 @@ $(document).on('turbolinks:load', (function(){
               $('<tbody></tbody>')
               .append('<tr></tr>')
               .append('<tr></tr>')
-              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`)
+              .append(prof_pic(val))
               .append(`<td>${val.city}</td>`)
             )
           })
-          console.log(data.cities)
+          console.log(data.cities);
         })
       })
     }))
+    
+  const prof_pic = (val) => {
+      console.log(val)
+      if(val.profile_image.url !== null){
+        return `<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`
+      }else{
+        return `<td><i class="fas fa-user fa-3x" ></i><a href="user/show/${val.id}">${val.nickname}</a></td>`
+      }
+    }
 
 $(document).on('turbolinks:load', (function(){
       $('#search_key').click(function(){
@@ -132,17 +158,43 @@ $(document).on('turbolinks:load', (function(){
         　
         　$.each(data.keies, function(index,val){
             $('#table_key').append(
-              $('<tbody></tbody>')
-              .append('<tr></tr>')
-              .append('<tr></tr>')
-              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`)
-              .append(`<td>${val.key_word1}${val.key_word2}${val.key_word3}</td>`)
+              (result(val))
             )
           })
-          console.log(data.keies)
+          console.log(data.keies);
         })
       })
     }))
+    
+  const result = (val) => {
+      console.log(val)
+      // ⓵if(val !== null){
+      // ⓶if(val !== ""){
+      // ⓷if(val.key_word1 !== null || val.key_word2 !== null || val.key_word3 !== null){
+      // ⓸if(val.key_word1 !== "" || val.key_word2 !== "" || val.key_word3 !== ""){
+      // ⓹if(val !== Array(0)){
+      if(val !== []){
+        return $('<tbody></tbody>')
+        .append('<tr></tr>')
+        .append('<tr align="left"></tr>')
+        .append(prof_pic2(val))
+        .append('<tr></tr>')
+        .append(`<td>＃${val.key_word1}</td>`)
+        .append(`<td>＃${val.key_word2}</td>`)
+        .append(`<td>＃${val.key_word3}</td>`)
+      }else {
+        return "一致する検索結果がありませんでした"
+      }
+    }
+    
+  const prof_pic2 = (val) => {
+      console.log(val)
+      if(val.profile_image.url !== null){
+        return `<td colspan="3"><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`
+      }else{
+        return `<td><i class="fas fa-user fa-3x" ></i><a href="user/show/${val.id}">${val.nickname}</a></td>`
+      }
+    }
     
 $(document).on('turbolinks:load', (function(){
       $('#search_title').click(function(){
@@ -164,12 +216,60 @@ $(document).on('turbolinks:load', (function(){
               $('<tbody></tbody>')
               .append('<tr></tr>')
               .append('<tr></tr>')
-              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`)
+              .append(`<td><img src="${val.user.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`)
+              .append('<tr></tr>')
               .append(`<td><a href="/post_show/${val.id}">${val.title}</a></td>`)
             )
           })
-          console.log(data.titles)
+          console.log(data.titles);
         })
       })
     }))
+
+$(document).on('turbolinks:load', (function(){
+      $('#search_p_key').click(function(){
+        let p_key = $('#p_key').val();
+        $.ajax({
+          type: 'GET',
+          url: '/result',
+          data: {p_key: p_key},
+          dataType: 'json'
+        })
+        .done(function(data){
+          $('#p_key_p').remove()
+          $('#table_p_key').remove()
+          $('#p_key_result').append('<p id="p_key_p">投稿の検索キーワード検索結果</p>');
+          $('#p_key_result').append('<table id="table_p_key"></table>');
+        　
+        　$.each(data.pkeies, function(index,val){
+            $('#table_p_key').append(
+              $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr align="left"></tr>')
+              .append(`<td colspan="5"><img src="${val.user.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`)
+              .append('<tr align="left"></tr>')
+              .append(`<td colspan="5"><a href="/post_show/${val.id}">${val.title}</a></td>`)
+              .append('<tr></tr>')
+              .append(`<td>＃${val.key_word1}</td>`)
+              .append(`<td>＃${val.key_word2}</td>`)
+              .append(`<td>＃${val.key_word3}</td>`)
+              .append(`<td>＃${val.key_word4}</td>`)
+              .append(`<td>＃${val.key_word5}</td>`)
+            )
+          })
+          console.log(data.pkeies);
+        })
+        console.log("hello");
+      })
+    }))
+    
+  const prof_pic_p = (val) => {
+      console.log(val)
+      if(val.profile_image.url !== null){
+        return `<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`
+      }else{
+        return `<td><i class="fas fa-user fa-10x"></i><a href="user/show/${val.id}">${val.nickname}</a></td>`
+      }
+    }
+    
 </script>

@@ -1,11 +1,10 @@
 class MessagesController < ApplicationController
   def index
-    if current_user.id.to_i == params[:id].to_i
       p'1========='
       @user = User.find_by(id: params[:id])
       p'2=========='
-      @meesages = Message.where(user_id: current_user.id)
-      @message_user_ids = Message.where(to_user_id: @user.id).or(Message.where(user_id: @user.id)).distinct.pluck(:user_id)
+      @meesages = Message.where(sender_id: current_user.id)
+      @message_user_ids = Message.where(receiver_id: @user.id).or(Message.where(sender_id: @user.id)).distinct.pluck(:sender_id)
       p'3============='
       @message_user_ids.delete(@user.id)
       p'4======================'
@@ -16,10 +15,6 @@ class MessagesController < ApplicationController
       else
         @users = User.none
       end
-    else
-      flash[:notice] = "権限がありません"
-      redirect_to("/")
-    end
   end
   def roomshow
     if current_user.id.to_i == params[:user_id].to_i

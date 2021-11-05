@@ -1,10 +1,8 @@
-class CreateMessages < ActiveRecord::Migration[5.2]
+class CreateRooms < ActiveRecord::Migration[5.2]
   def change
-    create_table :messages do |t|
-      t.text :content
+    create_table :rooms do |t|
       t.references :sender, foreign_key: { to_table: :users }
       t.references :receiver, foreign_key: { to_table: :users }
-      t.timestamp :receiver_opentime
       t.timestamps
     end
   end

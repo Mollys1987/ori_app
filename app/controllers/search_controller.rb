@@ -49,6 +49,14 @@ class SearchController < ApplicationController
         format.json { render json: {titles: @titles} }
       end
     end
+    if params[:p_key]
+      @p_keies = Post.where('key_word1 LIKE ? or key_word2 LIKE ? or key_word3 LIKE ? or key_word4 LIKE ? or key_word5 LIKE ?',
+                            "%#{params[:p_key]}%", "%#{params[:p_key]}%", "%#{params[:p_key]}%", "%#{params[:p_key]}%", "%#{params[:p_key]}%"
+                            ).as_json(include: :user)
+      respond_to do |format|
+        format.json { render json: {pkeies: @p_keies} }
+      end
+    end
   end
   
 end
