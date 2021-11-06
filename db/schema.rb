@@ -37,10 +37,12 @@ ActiveRecord::Schema.define(version: 2021_10_29_080644) do
     t.text "content"
     t.integer "sender_id"
     t.integer "receiver_id"
+    t.integer "room_id"
     t.datetime "receiver_opentime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 

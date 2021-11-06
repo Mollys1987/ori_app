@@ -32,10 +32,11 @@ Rails.application.routes.draw do
   post   '/login',         to: 'sessions#create'
   delete '/logout',        to: 'sessions#destroy'
 
-  get  'messages/index/:id',                 to: 'messages#index',    as: 'm_index'
-  get  'messages/room/:user_id/:to_user_id', to: 'messages#roomshow', as: 'room'
-  post 'send',                               to: 'messages#create',   as: 'send'
-
+  get  'room/index/:id',               to: 'rooms#index',   as: 'room'
+  get  'chat/:room_id',                to: 'rooms#chat',    as: 'exist_room'
+  get  'chat/:sender_id/:receiver_id', to: 'rooms#chat',    as: 'chat'
+  post 'message/send',                 to: 'messages#sending', as: 'm_send'
+  
   get 'search_func', to: 'search#search',  as: 'search_func'
   get 's_ajax', to: 'search#s_ajax', as: 's2'
   get 'result', to: 'search#result'

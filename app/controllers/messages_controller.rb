@@ -1,47 +1,63 @@
 class MessagesController < ApplicationController
-  def index
-      p'1========='
-      @user = User.find_by(id: params[:id])
-      p'2=========='
-      @meesages = Message.where(sender_id: current_user.id)
-      @message_user_ids = Message.where(receiver_id: @user.id).or(Message.where(sender_id: @user.id)).distinct.pluck(:sender_id)
-      p'3============='
-      @message_user_ids.delete(@user.id)
-      p'4======================'
-      if params[:nickname].present?
-      p'5======================='
-      @users = User.where('nickname LIKE ?', "%#{params[:nickname]}%")
-      p'6============================'
+  def sending
+    @sender = current_user
+    @receiver = User.find_by(id: params[:receiver_id])
+    p params
+    p '0=================='
+    if params[:message][:room_id]
+      p '1=============='
+      @exist_room = Room.find_by(id: params[:message][:room_id])
+      p @exist_room
+      p '2========================'
+      @message = @exist_room.messages.build(message_params)
+      p '3============'
+      p @message
+      @message.sender_id = current_user.id
+      if @message.sender_id == @exist_room.sender_id
+        @message.receiver_id = @exist_room.receiver_id
       else
-        @users = User.none
+        @message.receiver_id = @exist_room.sender_id
       end
-  end
-  def roomshow
-    if current_user.id.to_i == params[:user_id].to_i
-      @user = User.find_by(id: params[:user_id])
-      @to_user = User.find_by(id: params[:to_user_id])
-      @messages = Message.where(user_id: params[:user_id],to_user_id: params[:to_user_id]).order(created_at: :asc)
-      @message = Message.new
+        
+      p @message
     else
-      flash[:notice] = "権限がありません"
-      redirect_to("/")
+      p '4============='
+      @exist_room = room_check(params[:message][:sender_id], params[:message][:receiver_id])
+      p '5'
+      if !@exist_room
+        p '6'
+        @room = Room.create(rooms_params)
+      end
+      p '7'
+      @message = Message.new(message_params)
+      @message.room_id = @room.id
+      p @message.errors.full_messages
+      p @room.errors.full_messages
+    end
+    p '8'
+    p @message.errors.full_messages
+    if @message.save
+    p @message.errors.full_messages
+      flash[:notice] = "メッセージを送信しました！"
+      if @exist_room
+        redirect_to exist_room_path(@exist_room.id)
+      p '9'
+      else
+        redirect_to exist_room_path(@room.id)
+      end
+    else
+      p '10'
+      flash[:alert] = "メッセージを送信できませんでした"
+      render "rooms/chat"
     end
   end
-  
-  def create
-      @message = Message.new(message_params)
-      if @message.save
-        flash[:notice] = "メッセージを送信しました！"
-        redirect_back(fallback_location: root_path)
-      else
-        redirect_to("/")
-        flash[:alert] = "メッセージを送信できませんでした"
-      end
-  end
-  
+    
   private
     def message_params
-      params.require(:message).permit(:content, :user_id, :to_user_id)
+      params.require(:message).permit(:content, :sender_id, :receiver_id, :room_id)
     end
-  
+    
+    def rooms_params
+      params.require(:message).permit(:sender_id, :receiver_id)
+    end
 end

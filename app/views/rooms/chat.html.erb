@@ -1,0 +1,63 @@
+<h1>
+  <% if @room %>
+    <% if @room.receiver.id == current_user.id %>
+      <%= @room.sender.nickname %>さんとのメッセージ
+    <% else %>
+      <%= @room.receiver.nickname %>さんとのメッセージ
+    <% end %>
+  <% else %>
+    <%= @receiver.nickname %>さんとのメッセージ
+  <% end %>
+</h1>
+
+
+<div class="flex flex-col">
+  <% @messages&.each do |message| %>
+    <% if message.sender_id == current_user.id %>
+    <div class="right flex flex-row mb-8">
+    <div class="ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+        <p>
+          <%= message.content %>
+        </p>
+      </div>
+      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-white flex-shrink-0">
+        <% if @sender.profile_image? %>
+          <%= image_tag @sender.profile_image.url, width: "87px" %>
+        <% else %>
+          <%= image_tag ("rails.png") %>
+        <% end %>
+        <br>
+        <%= @sender.nickname %>
+      </div>
+    </div>
+    <% else %>
+    <div class="flex flex-row-reverse mb-8">
+      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-white flex-shrink-0">
+        <% if @room.receiver.profile_image? %>
+          <%= image_tag @receiver.profile_image.url, width: "87px" %>
+        <% else %>
+          <%= image_tag ("rails.png") %>
+        <% end %>
+        <br>
+        <%= @room.receiver.nickname %>
+      </div>
+      <div class="ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+        <p>
+          <%= message.content %>
+        </p>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+
+  <%= form_for(:message, url: m_send_path) do |form| %>
+    <%= form.text_area :content, id: "content", rows: "4", class: "form_textarea mb-4" %>
+    <% if @room %>
+      <%= form.text_field :room_id, class: "hidden hide", value: @room.id %>
+    <% else %>
+      <%= form.text_field :sender_id, class: "hidden hide", value: @sender.id %>
+      <%= form.text_field :receiver_id, class: "hidden hide", value: @receiver.id %>
+    <% end %>
+    <%= form.submit "メッセージ送信", class: "btn_01" %>
+  <% end %>

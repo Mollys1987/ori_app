@@ -168,12 +168,11 @@ $(document).on('turbolinks:load', (function(){
     
   const result = (val) => {
       console.log(val)
-      // ⓵if(val !== null){
-      // ⓶if(val !== ""){
-      // ⓷if(val.key_word1 !== null || val.key_word2 !== null || val.key_word3 !== null){
+      // if (val){
+      // if(val !== ""){
+      if(val.key_word1 !== null || val.key_word2 !== null || val.key_word3 !== null){
       // ⓸if(val.key_word1 !== "" || val.key_word2 !== "" || val.key_word3 !== ""){
-      // ⓹if(val !== Array(0)){
-      if(val !== []){
+      // if(val !== Array(0)){
         return $('<tbody></tbody>')
         .append('<tr></tr>')
         .append('<tr align="left"></tr>')
@@ -182,8 +181,11 @@ $(document).on('turbolinks:load', (function(){
         .append(`<td>＃${val.key_word1}</td>`)
         .append(`<td>＃${val.key_word2}</td>`)
         .append(`<td>＃${val.key_word3}</td>`)
-      }else {
-        return "一致する検索結果がありませんでした"
+        } else {
+        
+      return $('<tbody></tbody>')
+        .append('<tr></tr>')
+        .append(`<td><p>一致する検索結果がありませんでした</p></td>`)
       }
     }
     

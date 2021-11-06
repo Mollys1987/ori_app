@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  # before_action :message_notification
-   
-  # def message_notification
-  #   @message_notification_count = DirectMessage.where(to_user_id: current_user.id,to_user_opentime: nil).count
-  # end
+  
+  def room_check(sender, receiver)
+    exist_room = Room.find_by(sender_id: sender, receiver_id: receiver)
+    if !exist_room
+      exist_room = Room.find_by(sender_id: receiver, receiver_id: sender)
+    end
+    return exist_room
+  end
   
   private
 
