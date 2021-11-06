@@ -169,11 +169,13 @@ $(document).on('turbolinks:load', (function(){
   const result = (val) => {
       console.log(val)
       // if (val){
+      // if (val !== null){
+      // if (val !== nil){
       // if(val !== ""){
-      if(val.key_word1 !== null || val.key_word2 !== null || val.key_word3 !== null){
-      // ⓸if(val.key_word1 !== "" || val.key_word2 !== "" || val.key_word3 !== ""){
+      // if(val.key_word1 !== null || val.key_word2 !== null || val.key_word3 !== null){
+      // if(val.key_word1 !== "" || val.key_word2 !== "" || val.key_word3 !== ""){
       // if(val !== Array(0)){
-        return $('<tbody></tbody>')
+      return $('<tbody></tbody>')
         .append('<tr></tr>')
         .append('<tr align="left"></tr>')
         .append(prof_pic2(val))
@@ -181,7 +183,7 @@ $(document).on('turbolinks:load', (function(){
         .append(`<td>＃${val.key_word1}</td>`)
         .append(`<td>＃${val.key_word2}</td>`)
         .append(`<td>＃${val.key_word3}</td>`)
-        } else {
+      } else {
         
       return $('<tbody></tbody>')
         .append('<tr></tr>')
