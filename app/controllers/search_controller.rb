@@ -30,6 +30,8 @@ class SearchController < ApplicationController
       respond_to do |format|
         format.json { render json: {users: @users} }
       end
+    else
+      @users = User.none
     end
     if params[:city]
       @cities = User.where('city LIKE ?', "%#{params[:city]}%")

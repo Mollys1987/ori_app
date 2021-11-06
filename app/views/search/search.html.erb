@@ -175,6 +175,8 @@ $(document).on('turbolinks:load', (function(){
       // if(val.key_word1 !== null || val.key_word2 !== null || val.key_word3 !== null){
       // if(val.key_word1 !== "" || val.key_word2 !== "" || val.key_word3 !== ""){
       // if(val !== Array(0)){
+      // if (val.empty?){
+      if (val !== []){
       return $('<tbody></tbody>')
         .append('<tr></tr>')
         .append('<tr align="left"></tr>')
@@ -183,8 +185,7 @@ $(document).on('turbolinks:load', (function(){
         .append(`<td>＃${val.key_word1}</td>`)
         .append(`<td>＃${val.key_word2}</td>`)
         .append(`<td>＃${val.key_word3}</td>`)
-      } else {
-        
+      } else{
       return $('<tbody></tbody>')
         .append('<tr></tr>')
         .append(`<td><p>一致する検索結果がありませんでした</p></td>`)
