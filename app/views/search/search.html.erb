@@ -5,33 +5,38 @@
   <button id="p_search_btn">投稿の検索キーワード検索</button>
   
   <div id="u_search" class="hide">
-    <input type="text" name="nickname" placeholder="ニックネームを入力" id="nickname" />
-    <button id="search_nickname">検索</button>
+    <input type="text" name="nickname" placeholder="ニックネームを入力" id="nickname" class="nic_input"/>
+    <button id="search_nickname" class="nic_btn" disabled>検索</button>
     <div id="nickname_result"></div>
+    <div class="err_text" id="nic_err_textbox"></div>
   </div>
     
   <div id="c_search" class="hide">
     <input type="text" name="city" placeholder="市町村を入力" id="city" />
-    <button id="search_city">検索</button>
+    <button id="search_city" class="search_btn">検索</button>
     <div id="city_result"></div>
+    <div class="err_text" id="err_textbox"></div>
   </div>
   
   <div id="key_search" class="hide">
     <input type="text" name="key" placeholder="情報交換キーワードを入力" id="key" />
-    <button id="search_key">検索</button>
+    <button id="search_key" class="search_btn">検索</button>
     <div id="key_result"></div>
+    <div class="err_text" id="err_textbox"></div>
   </div>
   
   <div id="title_search" class="hide">
-    <input type="text" name="title" placeholder="投稿のタイトルを入力" id="title" />
-    <button id="search_title">検索</button>
+    <input type="text" name="title" placeholder="投稿のタイトルを入力" id="title"　/>
+    <button id="search_title" class="search_btn" >検索</button>
     <div id="title_result"></div>
+    <div class="err_text" id="err_textbox"></div>
   </div>
   
   <div id="p_search" class="hide">
-    <input type="text" name="p_key" placeholder="投稿の検索キーワードを入力" id="p_key" />
-    <button id="search_p_key">検索</button>
+    <input type="text" name="p_key" placeholder="投稿の検索キーワードを入力" id="p_key" >
+    <button id="search_p_key" class="search_btn">検索</button>
     <div id="p_key_result"></div>
+    <div class="err_text" id="err_textbox"></div>
   </div>
   
 <script>
@@ -75,6 +80,43 @@ $('#p_search_btn').click(function() {
         $('#p_search').fadeIn();
     })
 
+// $(function(){
+// 	$("#nickname").bind("blur", function() {
+// 		var _textbox = $(this).val();
+// 		check_textbox(_textbox);
+// 	});
+// });
+
+// function check_textbox(str){
+// 	$("#nic_err_textbox p").remove();
+// 	var _result = true;
+// 	var _textbox = $.trim(str);
+
+// 	if(_textbox.match(/^[ 　\r\n\t]*$/)){
+// 		$("#nic_err_textbox").append("<p><i class=\"fa fa-exclamation-triangle\"></i>検索ワードを入力してください。</p>");
+// 		_result = false;
+// 	}
+// 	return _result;
+// }
+
+const nicinput = document.getElementById('nickname');
+const nicbtn = document.getElementById('earch_nickname');
+nicinput.addEventListener('keyup', (e) => {
+  if (1 <= e.target.value.length) {
+    nicbtn.disabled = false;
+  } 
+})
+
+// const count_text = () => {
+//     const nickname = document.getElementById("nickname").value.length;
+//     if(nickname.length > 1){
+//       document.getElementsByClassName("nic_btn").removeAttribute("disabled");
+//     }else{
+//       document.getElementsByClassName("nic_btn").setAttribute("disabled", true);
+//       alert('検索ワードを入力してください');
+//     }
+//   }
+
 $(document).on('turbolinks:load', (function(){
       $('#search_nickname').click(function(){
         let nickname = $('#nickname').val();
@@ -85,23 +127,40 @@ $(document).on('turbolinks:load', (function(){
           dataType: 'json'
         })
         .done(function(data){
-          $('#nickname_p').remove()
-          $('#table_nickname').remove()
-          $('#nickname_result').append('<p id="nickname_p">ニックネーム検索結果</p>');
-          $('#nickname_result').append('<table id="table_nickname"></table>');
+          nic_check(data.users)
         　
         　$.each(data.users, function(index,val){
             $('#table_nickname').append(
-              $('<tbody></tbody>')
-              .append('<tr></tr>')
-              .append('<tr></tr>')
-              .append(prof_pic(val))
+              (nic_result(val))
             )
           })
           console.log(data.users);
         })
       })
     }))
+    
+const nic_check = (data) => {
+    if (data.length === 0) {
+      $('#nickname_p').remove()
+      $('#table_nickname').remove()
+      $('#nickname_result').append('<p id="nickname_p">ニックネーム検索結果<br>一致する検索結果がありませんでした</p>');
+    } else {
+      $('#nickname_p').remove()
+      $('#table_nickname').remove()
+      $('#nickname_result').append('<p id="nickname_p">ニックネーム検索結果</p>');
+      $('#nickname_result').append('<table id="table_nickname"></table>');
+    }
+  }
+  
+  const nic_result = (val) => {
+      console.log(val)
+      if (val !== null){
+      return $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr></tr>')
+              .append(prof_pic(val))
+      } 
+    }
 
 $(document).on('turbolinks:load', (function(){
       $('#search_city').click(function(){
@@ -113,18 +172,11 @@ $(document).on('turbolinks:load', (function(){
           dataType: 'json'
         })
         .done(function(data){
-          $('#city_p').remove()
-          $('#table_city').remove()
-          $('#city_result').append('<p id="city_p">居住エリア検索結果</p>');
-          $('#city_result').append('<table id="table_city"></table>');
-        　
+          city_check(data.cities)
+          
         　$.each(data.cities, function(index,val){
             $('#table_city').append(
-              $('<tbody></tbody>')
-              .append('<tr></tr>')
-              .append('<tr></tr>')
-              .append(prof_pic(val))
-              .append(`<td>${val.city}</td>`)
+              (city_result(val))
             )
           })
           console.log(data.cities);
@@ -132,13 +184,28 @@ $(document).on('turbolinks:load', (function(){
       })
     }))
     
-  const prof_pic = (val) => {
+const city_check = (data) => {
+    if (data.length === 0) {
+      $('#city_p').remove()
+      $('#table_city').remove()
+      $('#city_result').append('<p id="city_p">居住エリア検索結果<br>一致する検索結果がありませんでした</p>');
+    } else {
+      $('#city_p').remove()
+      $('#table_city').remove()
+      $('#city_result').append('<p id="city_p">居住エリア検索結果</p>');
+      $('#city_result').append('<table id="table_city"></table>');
+    }
+  }
+  
+  const city_result = (val) => {
       console.log(val)
-      if(val.profile_image.url !== null){
-        return `<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`
-      }else{
-        return `<td><i class="fas fa-user fa-3x" ></i><a href="user/show/${val.id}">${val.nickname}</a></td>`
-      }
+      if (val !== null){
+      return $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr></tr>')
+              .append(prof_pic(val))
+              .append(`<td>${val.city}</td>`)
+      } 
     }
 
 $(document).on('turbolinks:load', (function(){
@@ -151,11 +218,7 @@ $(document).on('turbolinks:load', (function(){
           dataType: 'json'
         })
         .done(function(data){
-          $('#key_p').remove()
-          $('#table_key').remove()
-          $('#key_result').append('<p id="key_p">投稿タイトル検索結果</p>');
-          $('#key_result').append('<table id="table_key"></table>');
-        　
+          key_check(data.keies)
         　$.each(data.keies, function(index,val){
             $('#table_key').append(
               (result(val))
@@ -165,39 +228,40 @@ $(document).on('turbolinks:load', (function(){
         })
       })
     }))
-    
+  
+  const key_check = (data) => {
+    if (data.length === 0) {
+      $('#key_p').remove()
+      $('#table_key').remove()
+      $('#key_result').append('<p id="key_p">情報交換キーワード検索結果<br>一致する検索結果がありませんでした</p>');
+    } else {
+      $('#key_p').remove()
+      $('#table_key').remove()
+      $('#key_result').append('<p id="key_p">情報交換キーワード検索結果</p>');
+      $('#key_result').append('<table id="table_key"></table>');
+    }
+  }
+  
   const result = (val) => {
       console.log(val)
-      // if (val){
-      // if (val !== null){
-      // if (val !== nil){
-      // if(val !== ""){
-      // if(val.key_word1 !== null || val.key_word2 !== null || val.key_word3 !== null){
-      // if(val.key_word1 !== "" || val.key_word2 !== "" || val.key_word3 !== ""){
-      // if(val !== Array(0)){
-      // if (val.empty?){
-      if (val !== []){
+      if (val !== null){
       return $('<tbody></tbody>')
         .append('<tr></tr>')
         .append('<tr align="left"></tr>')
-        .append(prof_pic2(val))
+        .append(prof_pic(val))
         .append('<tr></tr>')
         .append(`<td>＃${val.key_word1}</td>`)
         .append(`<td>＃${val.key_word2}</td>`)
         .append(`<td>＃${val.key_word3}</td>`)
-      } else{
-      return $('<tbody></tbody>')
-        .append('<tr></tr>')
-        .append(`<td><p>一致する検索結果がありませんでした</p></td>`)
-      }
+      } 
     }
     
-  const prof_pic2 = (val) => {
+  const prof_pic = (val) => {
       console.log(val)
       if(val.profile_image.url !== null){
         return `<td colspan="3"><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`
       }else{
-        return `<td><i class="fas fa-user fa-3x" ></i><a href="user/show/${val.id}">${val.nickname}</a></td>`
+        return `<td colspan="3"><i class="fas fa-user fa-3x" ></i><a href="user/show/${val.id}">${val.nickname}</a></td>`
       }
     }
     
@@ -211,25 +275,42 @@ $(document).on('turbolinks:load', (function(){
           dataType: 'json'
         })
         .done(function(data){
-          $('#title_p').remove()
-          $('#table_title').remove()
-          $('#title_result').append('<p id="title_p">投稿タイトル検索結果</p>');
-          $('#title_result').append('<table id="table_title"></table>');
-        　
+          title_check(data.titles)
+          
         　$.each(data.titles, function(index,val){
             $('#table_title').append(
-              $('<tbody></tbody>')
-              .append('<tr></tr>')
-              .append('<tr></tr>')
-              .append(`<td><img src="${val.user.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`)
-              .append('<tr></tr>')
-              .append(`<td><a href="/post_show/${val.id}">${val.title}</a></td>`)
+              title_result(val)
             )
           })
           console.log(data.titles);
         })
       })
     }))
+    
+const title_check = (data) => {
+    if (data.length === 0) {
+      $('#title_p').remove()
+      $('#table_title').remove()
+      $('#title_result').append('<p id="title_p">投稿タイトル検索結果<br>一致する検索結果がありませんでした</p>');
+    } else {
+      $('#title_p').remove()
+      $('#table_title').remove()
+      $('#title_result').append('<p id="title_p">投稿タイトル検索結果</p>');
+      $('#title_result').append('<table id="table_title"></table>');
+    }
+  }
+  
+  const title_result = (val) => {
+      console.log(val)
+      if (val !== null){
+      return  $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr></tr>')
+              .append(prof_pic_p(val))
+              .append('<tr></tr>')
+              .append(`<td><a href="/post_show/${val.id}">${val.title}</a></td>`)
+      } 
+    }
 
 $(document).on('turbolinks:load', (function(){
       $('#search_p_key').click(function(){
@@ -241,17 +322,38 @@ $(document).on('turbolinks:load', (function(){
           dataType: 'json'
         })
         .done(function(data){
-          $('#p_key_p').remove()
-          $('#table_p_key').remove()
-          $('#p_key_result').append('<p id="p_key_p">投稿の検索キーワード検索結果</p>');
-          $('#p_key_result').append('<table id="table_p_key"></table>');
-        　
+          p_key_check(data.pkeies)
+          
         　$.each(data.pkeies, function(index,val){
             $('#table_p_key').append(
-              $('<tbody></tbody>')
+              p_key_result(val)
+            )
+          })
+          console.log(data.pkeies);
+        })
+      })
+    }))
+    
+const p_key_check = (data) => {
+    if (data.length === 0) {
+      $('#p_key_p').remove()
+      $('#table_p_key').remove()
+      $('#p_key_result').append('<p id="p_key_p">投稿の検索キーワード検索結果<br>一致する検索結果がありませんでした</p>');
+    } else {
+      $('#p_key_p').remove()
+      $('#table_p_key').remove()
+      $('#p_key_result').append('<p id="p_key_p">投稿の検索キーワード検索結果</p>');
+      $('#p_key_result').append('<table id="table_p_key"></table>');
+    }
+  }
+  
+  const p_key_result = (val) => {
+      console.log(val)
+      if (val !== null){
+      return  $('<tbody></tbody>')
               .append('<tr></tr>')
               .append('<tr align="left"></tr>')
-              .append(`<td colspan="5"><img src="${val.user.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`)
+              .append(prof_pic_p(val))
               .append('<tr align="left"></tr>')
               .append(`<td colspan="5"><a href="/post_show/${val.id}">${val.title}</a></td>`)
               .append('<tr></tr>')
@@ -260,20 +362,15 @@ $(document).on('turbolinks:load', (function(){
               .append(`<td>＃${val.key_word3}</td>`)
               .append(`<td>＃${val.key_word4}</td>`)
               .append(`<td>＃${val.key_word5}</td>`)
-            )
-          })
-          console.log(data.pkeies);
-        })
-        console.log("hello");
-      })
-    }))
+      } 
+    }
     
   const prof_pic_p = (val) => {
       console.log(val)
-      if(val.profile_image.url !== null){
-        return `<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`
+      if(val.user.profile_image.url !== null){
+        return `<td colspan="5"><img src="${val.user.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`
       }else{
-        return `<td><i class="fas fa-user fa-10x"></i><a href="user/show/${val.id}">${val.nickname}</a></td>`
+        return `<td colspan="5"><i class="fas fa-user fa-3x"></i><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`
       }
     }
     
