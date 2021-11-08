@@ -33,7 +33,10 @@ class SearchController < ApplicationController
     else
       @users = User.none
     end
-    if params[:city]
+    if  params[:city] == ""
+      @cities = User.none
+      flash.now[:alert] = "検索ワードを入力してください"
+    elsif params[:city]
       @cities = User.where('city LIKE ?', "%#{params[:city]}%")
       respond_to do |format|
         format.json { render json: {cities: @cities} }
