@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
   <% if logged_in? %>
     <%= current_user.nickname %>さん
-    <a class="nav-item nav-link" href="#"><i class="far fa-bell"></i><p>お知らせ</p></a>
+    <%= link_to "お知らせ", notifications_path, class: "far fa-bell" %>
+    <% if unchecked_notifications.any? %>
+      <i class="fa fa-circle notification-circle"></i>
+    <% end %>
     <a class="nav-item nav-link" href="#"><i class="fas fa-cog"></i><p>設定</p></a>
   <% else %>
    <a class="navbar-brand" href="/">App</a>

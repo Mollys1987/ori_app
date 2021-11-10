@@ -4,6 +4,7 @@ class RepliesController < ApplicationController
     @reply = @comment.replies.build(reply_params)
     @reply.user_id = current_user.id
     if @reply.save
+      @comment.create_notification_reply!(current_user, @reply.id)
       flash[:success] = "コメントを作成しました"
       redirect_back(fallback_location: root_path)
     else

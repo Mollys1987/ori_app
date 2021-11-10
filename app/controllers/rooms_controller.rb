@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
     if params[:nickname].present?
       @users = User.where('nickname LIKE ?', "%#{params[:nickname]}%")
     else
-      flash.now[:alert] = "検索ワードを入力してください"
+      # flash.now[:alert] = "検索ワードを入力してください"
       @users = User.none
     end
     @user = current_user

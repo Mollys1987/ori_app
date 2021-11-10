@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_080644) do
+ActiveRecord::Schema.define(version: 2021_11_08_152531) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -38,12 +38,30 @@ ActiveRecord::Schema.define(version: 2021_10_29_080644) do
     t.integer "sender_id"
     t.integer "receiver_id"
     t.integer "room_id"
-    t.datetime "receiver_opentime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.integer "reply_id"
+    t.integer "message_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["message_id"], name: "index_notifications_on_message_id"
+    t.index ["post_id"], name: "index_notifications_on_post_id"
+    t.index ["reply_id"], name: "index_notifications_on_reply_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "posts", force: :cascade do |t|

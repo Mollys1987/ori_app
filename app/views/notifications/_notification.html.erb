@@ -1,0 +1,20 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+<%= link_to user_path(notification.visitor) do %>
+  <% if visitor.profile_image? %>
+    <%= image_tag visitor.profile_image.url, style:"width: 60px;" %>
+  <% else %>
+    <i class="fas fa-user fa-3x"></i>
+  <% end %>
+<% end %>  
+<%== notification_form(notification) %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)}前)" %></span>
+<br>
+<% if !@comment.nil? %>
+  <p class="moderate-font"><%= @comment %></p>
+<% end %>
+<% if !@reply.nil? %>
+  <p class="moderate-font"><%= @reply %></p>
+<% end %> 
+<% if !@message.nil? %>
+  <p class="moderate-font"><%= @message %></p>
+<% end %> 

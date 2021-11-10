@@ -11,6 +11,7 @@
   </thead>
   <tbody>
     <% @users.each do |user| %>
+    <% if user != current_user %>
     <tr>
       <td><% if user.profile_image? %>
             <%= image_tag user.profile_image.url, class: "icon_size" %>
@@ -22,6 +23,7 @@
       <td><%= user.prefucture %></td>
       <td><%= user.classification %></td>
     </tr>
+    <% end %>
     <% end %>
   </tbody>  
 </table>

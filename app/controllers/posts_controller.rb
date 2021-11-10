@@ -22,6 +22,11 @@ class PostsController < ApplicationController
     p 'index_end==========='
   end
   
+  def like
+    @user = current_user
+    @follow_users = @user.following
+  end
+  
   def show
     p 'show_start========================='
     @post = Post.find(params[:id])

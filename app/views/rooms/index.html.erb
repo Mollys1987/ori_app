@@ -35,4 +35,7 @@
       <% end %>
     </li>
   <% end %>
+  <% if @rooms.empty? %>
+     <li>メッセージの履歴がありません</li>
+   <% end %>
 </ul>

@@ -24,7 +24,7 @@
         <% if @sender.profile_image? %>
           <%= image_tag @sender.profile_image.url, width: "87px" %>
         <% else %>
-          <%= image_tag ("rails.png") %>
+          <i class="fas fa-user fa-3x"></i>
         <% end %>
         <br>
         <%= @sender.nickname %>
@@ -33,13 +33,18 @@
     <% else %>
     <div class="flex flex-row-reverse mb-8">
       <div class="flex items-center justify-center h-10 w-10 rounded-full bg-white flex-shrink-0">
-        <% if @room.receiver.profile_image? %>
+        <% if @room.receiver == current_user %>
+          <% @receiver = @room.sender %>
+        <% else %>
+          <% @receiver = @room.receiver %>
+        <% end %>
+        <% if @receiver.profile_image? %>
           <%= image_tag @receiver.profile_image.url, width: "87px" %>
         <% else %>
-          <%= image_tag ("rails.png") %>
+          <i class="fas fa-user fa-3x"></i>
         <% end %>
         <br>
-        <%= @room.receiver.nickname %>
+        <%= @receiver.nickname %>
       </div>
       <div class="ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
         <p>
