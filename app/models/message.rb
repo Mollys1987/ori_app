@@ -4,10 +4,9 @@ class Message < ApplicationRecord
   belongs_to :receiver, class_name: "User", foreign_key: "receiver_id"
   belongs_to :room
   
-  def save_notification_message!(current_user, receiver_id, message_id)
-    # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
-    notification = current_user.active_notifications.new(
-      visitor_id: current_user,
+  def save_notification_message!(sender_id, receiver_id, message_id)
+    notification = sender.active_notifications.new(
+      visitor_id: sender_id,
       visited_id: receiver_id,
       message_id: message_id,
       action: 'message'

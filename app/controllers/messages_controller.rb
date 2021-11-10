@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
       p @message
       p '1==='
       if params[:message][:room_id]
-        @message.save_notification_message!(current_user.id, @message.receiver_id, @message.id)
+        @message.save_notification_message!(@message.sender_id, @message.receiver_id, @message.id)
       else
         if current_user.id == @message.sender.id
           @mes_receiver =  @message.receiver
@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
         p current_user.id
         p @mes_receiver.id
         p @message.id
-        @message.save_notification_message!(current_user.id, @mes_receiver.id, @message.id)
+        @message.save_notification_message!(@message.sender.id, @mes_receiver.id, @message.id)
       end
       flash[:notice] = "メッセージを送信しました！"
       if @exist_room
