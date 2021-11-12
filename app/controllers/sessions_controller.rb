@@ -4,11 +4,17 @@ class SessionsController < ApplicationController
   
   def create
     p'1====================='
-    if params[:session][:answer_digest] && params[:session][:nickname].presence
+    if params[:session][:nickname].presence && params[:session][:answer_digest].presence
     p'2====================='
       user = User.find_by(nickname: params[:session][:nickname])
     p'3====================='
-      login_result = BCrypt::Password.new(user.answer_digest).is_password?(params[:session][:answer_digest])
+      if user == nil
+        flash[:danger] = 'ユーザー登録がありません'
+        redirect_back(fallback_location: root_path)
+        return
+      else
+        login_result = BCrypt::Password.new(user.answer_digest).is_password?(params[:session][:answer_digest])
+      end
     end
     p'5====================='
     if user && login_result

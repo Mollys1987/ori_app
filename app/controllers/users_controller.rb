@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.all.order(id: :asc)
+    @users = User.order("RANDOM()").all
   end
   
   def edit

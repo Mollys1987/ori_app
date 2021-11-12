@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   
   def index
     p 'index============='
-    @posts = Post.all
+    @posts = Post.order("RANDOM()").all
     p 'index_end==========='
   end
   
@@ -55,10 +55,9 @@ class PostsController < ApplicationController
     p 'des_start========================='
     @post = Post.find_by(id: params[:id])
     @post.destroy
-    flash[:success] = "post deleted"
+    flash[:success] = "投稿を削除しました"
     redirect_to u_show_path(current_user)
     p 'des_end========================='
-
   end
   
   private

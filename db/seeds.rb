@@ -26,9 +26,9 @@ User.create!(nickname: "ますお",
             answer_digest: "カレー"
             )
             
-20.times do |n|
-    User.create!(
-      nickname: "テストユーザー#{n + 1}",
-      answer_digest: "カレー"
-    )
-  end
+# 20.times do |n|
+#     User.create!(
+#       nickname: "テストユーザー#{n + 1}",
+#       answer_digest: "カレー"
+#     )
+#   end

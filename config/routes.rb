@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   patch  'post_update/:id',    to: 'posts#update',  as: 'p_up'
   delete 'post_delete/:id',    to: 'posts#destroy', as: 'p_des'
   post  'posts/:post_id/comment',    to: 'comments#create', as: 'p_com'
+  delete 'comment_delete/:id',    to: 'comments#destroy', as: 'com_des'
   post  'posts/:user_id/comment/:comment_id', to: 'replies#create', as: 'reply'
   post  'posts/:user_id/reply/:reply_id',     to: 'replies#re_rep', as: 'r_reply'
   resources :posts do
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
   
-  get    '/login',         to: 'sessions#new'
+  get    '/login',         to: 'sessions#new',       as: 'login'
   post   '/login',         to: 'sessions#create'
   delete '/logout',        to: 'sessions#destroy'
 
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
   post 'message/send',                 to: 'messages#sending', as: 'm_send'
   
   get 'search_func', to: 'search#search',  as: 'search_func'
-  get 's_ajax', to: 'search#s_ajax', as: 's2'
   get 'result', to: 'search#result'
   
   resources :notifications, only: :index

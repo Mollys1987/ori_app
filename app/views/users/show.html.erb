@@ -24,16 +24,16 @@
   <thead>
     <tr>
       <th scope="col">タイトル</th>
-      <th scope="col">検索キーワード</th>
       <th scope="col">作成日時</th>
+      <th scope="col">検索キーワード</th>
     </tr>
   </thead>
   <tbody>
     <% @user.posts.each do |post| %>
     <tr>
       <td><%= link_to post.title, p_show_path(post.id) %></td>
-      <td><%= post.updated_at %></td>
-      <td><%= post.created_at %></td>
+      <td><%= post.created_at.to_s(:datetime_jp) %></td>
+      <td><%= "#1.#{post.key_word1},#2.#{post.key_word2},#3.#{post.key_word3},#4.#{post.key_word4},#5.#{post.key_word5}," %></td>
     </tr>
     <% end %>
   </tbody>

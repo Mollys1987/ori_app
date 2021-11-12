@@ -1,24 +1,5 @@
 class SearchController < ApplicationController
   def search
-    p "==========="
-    p params
-    p "==========="
-    @multis = User.where('key_word1 LIKE ? or key_word2 LIKE ? or key_word3 LIKE ?', "%#{params[:multi]}%", "%#{params[:multi]}%", "%#{params[:multi]}%")
-    # if params[:nickname] or params[:area] or params[:title].present?
-    #   @users = User.where('nickname LIKE ?', "%#{params[:nickname]}%")
-    #   @areas = User.where('city LIKE ?', "%#{params[:city]}%")
-    #   @posts = Post.where('title LIKE ?', "%#{params[:title]}%")
-    # else
-    #   @multis = User.none
-    #   @users = User.none
-    #   @areas = User.none
-    #   @posts = Post.none
-    #   # flash[:notice] = "一致する結果がありません"
-    # end
-  end
-  
-  def s_ajax
-    
   end
   
   def result
@@ -30,8 +11,6 @@ class SearchController < ApplicationController
       respond_to do |format|
         format.json { render json: {users: @users} }
       end
-    else
-      @users = User.none
     end
     if  params[:city] == ""
       @cities = User.none

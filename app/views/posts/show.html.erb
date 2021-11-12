@@ -15,7 +15,7 @@
        <%= video_tag(@post.video.to_s, width: "100%", height: "100%") if @post.video?%>
       <% end %>
       <p><%= @post.content %></p>
-      <footer class="blockquote-footer">作成時間: <i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %>前</footer>
+      <footer class="blockquote-footer">作成時間: <i class="far fa-clock clock-icon"></i><%= date_format(@post.created_at) %></footer>
     </blockquote>
   </div>
     <% if current_user?(@post.user) %>
@@ -46,6 +46,9 @@
             </div>
             <div class="card-body">
               <%= c.content %>
+              <br>
+              <%= "コメント時間：#{date_format(c.created_at)}" %>
+              
             </div>
             <button id="reply" class="hide_btn">コメントに返信する</button>
               <div id="reply_form">
@@ -68,6 +71,8 @@
                       </div>
                       <div class="card-body">
                         <%= rep.re_comment %>
+                        <br>
+                        <%= "コメント時間：#{date_format(rep.created_at)}" %>
                       </div>
                     <% end %>
                   </div>
