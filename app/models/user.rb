@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
-  has_many :rooms
-  has_many :messages
-  has_many :comments
+  has_many :rooms, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :replies, class_name: 'Reply', foreign_key: :user_id, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",

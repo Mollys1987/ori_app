@@ -14,19 +14,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    p 'des_start========================='
-    @post = Post.find_by(id: params[:id])
-    @post.destroy
+    p params
+    comment = Comment.find_by(id: params[:id])
+    comment.destroy
     flash[:success] = "コメントを削除しました"
     redirect_back(fallback_location: root_path)
-    p 'des_end========================='
-
   end
-
-  # def new
-  #   @post = Post.find(params[:post_id])
-  #   @comment = @post.comments.new(parent_id: params[:parent_id])
-  # end
 
   private
   def comment_params

@@ -46,6 +46,14 @@ class MessagesController < ApplicationController
       render "rooms/chat"
     end
   end
+  
+  def destroy
+    p params
+    message = Message.find_by(id: params[:id])
+    message.destroy
+    flash[:success] = "メッセージを削除しました"
+    redirect_back(fallback_location: root_path)
+  end
     
   private
     def message_params

@@ -12,16 +12,12 @@ class RepliesController < ApplicationController
     end
   end
   
-  def re_rep
-    @re_rep = Reply.new(re_params)
-    p @re_rep.errors.full_messages
-    if @re_rep.save
-      flash[:success] = "コメントに返信しました"
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_back(fallback_location: root_path)
-    end
-    p @re_rep.errors.full_messages
+  def destroy
+    p params
+    reply = Reply.find_by(id: params[:id])
+    reply.destroy
+    flash[:success] = "コメントを削除しました"
+    redirect_back(fallback_location: root_path)
   end
   
   private

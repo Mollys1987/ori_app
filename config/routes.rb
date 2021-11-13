@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post  'posts/:post_id/comment',    to: 'comments#create', as: 'p_com'
   delete 'comment_delete/:id',    to: 'comments#destroy', as: 'com_des'
   post  'posts/:user_id/comment/:comment_id', to: 'replies#create', as: 'reply'
-  post  'posts/:user_id/reply/:reply_id',     to: 'replies#re_rep', as: 'r_reply'
+  delete 'reply_delete/:id',    to: 'replies#destroy', as: 'rep_des'
   resources :posts do
     resources :likes, only: [:create, :destroy]
   end
@@ -37,7 +37,9 @@ Rails.application.routes.draw do
   get  'room/index/:id',               to: 'rooms#index',   as: 'room'
   get  'chat/:room_id',                to: 'rooms#chat',    as: 'exist_room'
   get  'chat/:sender_id/:receiver_id', to: 'rooms#chat',    as: 'chat'
+  delete 'room_delete/:id',            to: 'rooms#destroy', as: 'room_des'
   post 'message/send',                 to: 'messages#sending', as: 'm_send'
+  delete 'message_delete/:id',         to: 'messages#destroy', as: 'mes_des'
   
   get 'search_func', to: 'search#search',  as: 'search_func'
   get 'result', to: 'search#result'

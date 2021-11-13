@@ -29,4 +29,13 @@ class RoomsController < ApplicationController
       @messages = Message.where(room_id: @room.id)
     end
   end
+  
+  def destroy
+    p params
+    room = Room.find_by(id: params[:id])
+    room.destroy
+    flash[:success] = "メッセージ履歴を削除しました"
+    redirect_back(fallback_location: root_path)
+  end
+  
 end

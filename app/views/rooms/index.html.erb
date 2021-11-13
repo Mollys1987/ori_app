@@ -33,6 +33,7 @@
       <% else %>
         <%= link_to room.receiver.nickname, exist_room_path(room.id) %>
       <% end %>
+      <%= link_to "履歴の削除", room_des_path(room.id), method: :delete %>
     </li>
   <% end %>
   <% if @rooms.empty? %>
