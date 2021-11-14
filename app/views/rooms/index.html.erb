@@ -29,10 +29,11 @@
   <% @rooms.each do | room | %>
     <li>
       <% if @user.id == room.receiver.id %>
-        <%= link_to room.sender.nickname, exist_room_path(room.id) %>
+        <%= link_to "#{room.sender.nickname}さんとのメッセージ", exist_room_path(room.id) %>
       <% else %>
-        <%= link_to room.receiver.nickname, exist_room_path(room.id) %>
+        <%= link_to "#{room.receiver.nickname}さんとのメッセージ", exist_room_path(room.id) %>
       <% end %>
+      <br>
       <%= link_to "履歴の削除", room_des_path(room.id), method: :delete %>
     </li>
   <% end %>

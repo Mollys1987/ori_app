@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :index,:update,
                                         :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
+  before_action :admin_user,     only: :destroy
   
   def new
     @user = User.new
@@ -28,7 +29,9 @@ class UsersController < ApplicationController
   end
   
   def index
+    @admin = User.find(1)
     @users = User.order("RANDOM()").all
+    @users = Kaminari.paginate_array(@users).page(params[:page])
   end
   
   def edit
@@ -61,6 +64,14 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
   
+  def destroy
+    p params
+    user = User.find_by(id: params[:id])
+    user.destroy
+    flash[:success] = "ユーザーを削除しました"
+    redirect_back(fallback_location: root_path)
+  end
+  
   private
     def user_params
       params.require(:user).permit(:nickname, :age, :sex, :prefucture,
@@ -72,5 +83,9 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(current_user.id)
       redirect_to(root_url) unless current_user?(@user)
+    end
+    
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end

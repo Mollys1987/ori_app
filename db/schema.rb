@@ -95,11 +95,9 @@ ActiveRecord::Schema.define(version: 2021_11_08_152531) do
     t.string "re_comment"
     t.integer "user_id"
     t.integer "comment_id"
-    t.integer "reply_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_replies_on_comment_id"
-    t.index ["reply_id"], name: "index_replies_on_reply_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
@@ -128,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_11_08_152531) do
     t.string "password_digest"
     t.string "answer_digest"
     t.string "remember_digest"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -118,7 +118,7 @@ $('#p_search_btn').click(function() {
 
 function count_nic() {
     let nickname = document.getElementById("nickname").value.length;
-    if(nickname > 1){
+    if(nickname >= 1){
       document.getElementById("search_nickname").removeAttribute("disabled");
     }else{
       document.getElementById("search_nickname").setAttribute("disabled", true);
@@ -127,7 +127,7 @@ function count_nic() {
 
 function count_city() {
     let city = document.getElementById("city").value.length;
-    if(city > 1){
+    if(city >= 1){
       document.getElementById("search_city").removeAttribute("disabled");
     }else{
       document.getElementById("search_city").setAttribute("disabled", true);
@@ -136,7 +136,7 @@ function count_city() {
   
 function count_key() {
     let key = document.getElementById("key").value.length;
-    if(key > 1){
+    if(key >= 1){
       document.getElementById("search_key").removeAttribute("disabled");
     }else{
       document.getElementById("search_key").setAttribute("disabled", true);
@@ -145,7 +145,7 @@ function count_key() {
 
 function count_title() {
     let title = document.getElementById("title").value.length;
-    if(title > 1){
+    if(title >= 1){
       document.getElementById("search_title").removeAttribute("disabled");
     }else{
       document.getElementById("search_title").setAttribute("disabled", true);
@@ -154,7 +154,7 @@ function count_title() {
   
 function count_p_key() {
     let p_key = document.getElementById("p_key").value.length;
-    if(p_key > 1){
+    if(p_key >= 1){
       document.getElementById("search_p_key").removeAttribute("disabled");
     }else{
       document.getElementById("search_p_key").setAttribute("disabled", true);
@@ -183,7 +183,7 @@ $(document).on('turbolinks:load', (function(){
       })
     }))
     
-const nic_check = (data) => {
+var nic_check = (data) => {
     if (data.length === 0) {
       $('#nickname_p').remove()
       $('#table_nickname').remove()
@@ -196,7 +196,7 @@ const nic_check = (data) => {
     }
   }
   
-  const nic_result = (val) => {
+  var nic_result = (val) => {
       console.log(val)
       if (val !== null){
       return $('<tbody></tbody>')
@@ -228,7 +228,7 @@ $(document).on('turbolinks:load', (function(){
       })
     }))
     
-const city_check = (data) => {
+var city_check = (data) => {
     if (data.length === 0) {
       $('#city_p').remove()
       $('#table_city').remove()
@@ -241,7 +241,7 @@ const city_check = (data) => {
     }
   }
   
-  const city_result = (val) => {
+  var city_result = (val) => {
       console.log(val)
       if (val !== null){
       return $('<tbody></tbody>')
@@ -273,7 +273,7 @@ $(document).on('turbolinks:load', (function(){
       })
     }))
   
-  const key_check = (data) => {
+  var key_check = (data) => {
     if (data.length === 0) {
       $('#key_p').remove()
       $('#table_key').remove()
@@ -286,7 +286,7 @@ $(document).on('turbolinks:load', (function(){
     }
   }
   
-  const result = (val) => {
+  var result = (val) => {
       console.log(val)
       if (val !== null){
       return $('<tbody></tbody>')
@@ -300,7 +300,7 @@ $(document).on('turbolinks:load', (function(){
       } 
     }
     
-  const prof_pic = (val) => {
+  var prof_pic = (val) => {
       console.log(val)
       if(val.profile_image.url !== null){
         return `<td colspan="3"><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`
@@ -331,7 +331,7 @@ $(document).on('turbolinks:load', (function(){
       })
     }))
     
-const title_check = (data) => {
+var title_check = (data) => {
     if (data.length === 0) {
       $('#title_p').remove()
       $('#table_title').remove()
@@ -344,7 +344,7 @@ const title_check = (data) => {
     }
   }
   
-  const title_result = (val) => {
+  var title_result = (val) => {
       console.log(val)
       if (val !== null){
       return  $('<tbody></tbody>')
@@ -378,7 +378,7 @@ $(document).on('turbolinks:load', (function(){
       })
     }))
     
-const p_key_check = (data) => {
+var p_key_check = (data) => {
     if (data.length === 0) {
       $('#p_key_p').remove()
       $('#table_p_key').remove()
@@ -391,7 +391,7 @@ const p_key_check = (data) => {
     }
   }
   
-  const p_key_result = (val) => {
+  var p_key_result = (val) => {
       console.log(val)
       if (val !== null){
       return  $('<tbody></tbody>')
@@ -409,7 +409,7 @@ const p_key_check = (data) => {
       } 
     }
     
-  const prof_pic_p = (val) => {
+  var prof_pic_p = (val) => {
       console.log(val)
       if(val.user.profile_image.url !== null){
         return `<td colspan="5"><img src="${val.user.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`

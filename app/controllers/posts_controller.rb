@@ -17,9 +17,8 @@ class PostsController < ApplicationController
   end
   
   def index
-    p 'index============='
     @posts = Post.order("RANDOM()").all
-    p 'index_end==========='
+    @posts = Kaminari.paginate_array(@posts).page(params[:page])
   end
   
   def like

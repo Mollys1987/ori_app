@@ -10,6 +10,8 @@ gem 'carrierwave',             '1.2.2'
 gem 'mini_magick',             '4.7.0'
 gem 'font-awesome-sass'
 gem 'font-awesome-rails'
+gem 'will_paginate',           '3.1.6'
+gem 'bootstrap-will_paginate', '1.0.0'
 # gem 'bootstrap-sass', '3.3.7'
 # gem 'jquery-rails'
 # Use sqlite3 as the database for Active Record
@@ -67,3 +69,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'kaminari'

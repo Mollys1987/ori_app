@@ -45,4 +45,6 @@ Rails.application.routes.draw do
   get 'result', to: 'search#result'
   
   resources :notifications, only: :index
+  
+  delete 'user_delete/:id', to: 'users#destroy', as: 'u_des'
 end

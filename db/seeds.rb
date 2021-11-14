@@ -1,3 +1,8 @@
+User.create!(nickname: "管理人",
+            answer_digest: BCrypt::Password.create("つぶがい"),
+            admin: true
+            )
+
 User.create!(nickname: "ステイサム",
             age: "50s",
             sex: "men",
@@ -9,7 +14,7 @@ User.create!(nickname: "ステイサム",
             key_word1: "介護疲れ",
             key_word2: "腰痛",
             key_word3: "認知症",
-            answer_digest: "カレー"
+            answer_digest: BCrypt::Password.create("カレー")
             )
 
 User.create!(nickname: "ますお",
@@ -23,12 +28,20 @@ User.create!(nickname: "ますお",
             key_word1: "介護疲れ",
             key_word2: "腰痛",
             key_word3: "認知症",
-            answer_digest: "カレー"
+            answer_digest: BCrypt::Password.create("カレー")
             )
             
-# 20.times do |n|
-#     User.create!(
-#       nickname: "テストユーザー#{n + 1}",
-#       answer_digest: "カレー"
-#     )
-#   end
+30.times do |n|
+    User.create!(
+      nickname: "テストユーザー#{n + 1}",
+      answer_digest: BCrypt::Password.create("カレー")
+    )
+end
+
+30.times do |n|
+    Post.create!(
+      title: "テスト#{n + 1}",
+      content: "テスト文章#{n + 1}",
+      user_id: 2
+    )
+end
