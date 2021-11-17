@@ -5,35 +5,35 @@
   <button id="p_search_btn">投稿の検索キーワード検索</button>
   
   <div id="u_search" class="hide">
-    <input type="text" name="nickname" placeholder="ニックネームを入力" id="nickname" oninput="count_nic()"/>
+    <input type="text" name="nickname" placeholder="ニックネームを入力" id="nickname" oninput="input_check()"/>
     <button id="search_nickname" disabled>検索</button>
     <div id="nickname_result"></div>
     <div class="err_text" id="nic_err_textbox"></div>
   </div>
     
   <div id="c_search" class="hide">
-    <input type="text" name="city" placeholder="市町村を入力" id="city" oninput="count_city()"/>
+    <input type="text" name="city" placeholder="市町村を入力" id="city" oninput="input_check()"/>
     <button id="search_city" disabled>検索</button>
     <div id="city_result"></div>
     <div class="err_text" id="err_textbox"></div>
   </div>
   
   <div id="key_search" class="hide">
-    <input type="text" name="key" placeholder="情報交換キーワードを入力" id="key" oninput="count_key()"/>
+    <input type="text" name="key" placeholder="情報交換キーワードを入力" id="key" oninput="input_check()"/>
     <button id="search_key" disabled>検索</button>
     <div id="key_result"></div>
     <div class="err_text" id="err_textbox"></div>
   </div>
   
   <div id="title_search" class="hide">
-    <input type="text" name="title" placeholder="投稿のタイトルを入力" id="title" oninput="count_title()"/>
+    <input type="text" name="title" placeholder="投稿のタイトルを入力" id="title" oninput="input_check()"/>
     <button id="search_title" disabled>検索</button>
     <div id="title_result"></div>
     <div class="err_text" id="err_textbox"></div>
   </div>
   
   <div id="p_search" class="hide">
-    <input type="text" name="p_key" placeholder="投稿の検索キーワードを入力" id="p_key" oninput="count_p_key()">
+    <input type="text" name="p_key" placeholder="投稿の検索キーワードを入力" id="p_key" oninput="input_check()">
     <button id="search_p_key" disabled>検索</button>
     <div id="p_key_result"></div>
     <div class="err_text" id="err_textbox"></div>
@@ -116,50 +116,88 @@ $('#p_search_btn').click(function() {
 //     }
 //   }
 
-function count_nic() {
-    let nickname = document.getElementById("nickname").value.length;
-    if(nickname >= 1){
-      document.getElementById("search_nickname").removeAttribute("disabled");
-    }else{
-      document.getElementById("search_nickname").setAttribute("disabled", true);
-    }
+function input_check(){
+  let nickname = document.getElementById("nickname").value.length;
+  let city = document.getElementById("city").value.length;
+  let key = document.getElementById("key").value.length;
+  let title = document.getElementById("title").value.length;
+  let p_key = document.getElementById("p_key").value.length;
+
+  if(nickname >= 1){
+    document.getElementById("search_nickname").removeAttribute("disabled");
+  }else{
+    document.getElementById("search_nickname").setAttribute("disabled", true);
   }
 
-function count_city() {
-    let city = document.getElementById("city").value.length;
-    if(city >= 1){
-      document.getElementById("search_city").removeAttribute("disabled");
-    }else{
-      document.getElementById("search_city").setAttribute("disabled", true);
-    }
-  }
-  
-function count_key() {
-    let key = document.getElementById("key").value.length;
-    if(key >= 1){
-      document.getElementById("search_key").removeAttribute("disabled");
-    }else{
-      document.getElementById("search_key").setAttribute("disabled", true);
-    }
+  if(city >= 1){
+    document.getElementById("search_city").removeAttribute("disabled");
+  }else{
+    document.getElementById("search_city").setAttribute("disabled", true);
   }
 
-function count_title() {
-    let title = document.getElementById("title").value.length;
-    if(title >= 1){
-      document.getElementById("search_title").removeAttribute("disabled");
-    }else{
-      document.getElementById("search_title").setAttribute("disabled", true);
-    }
+  if(key >= 1){
+    document.getElementById("search_key").removeAttribute("disabled");
+  }else{
+    document.getElementById("search_key").setAttribute("disabled", true);
   }
+
+  if(title >= 1){
+    document.getElementById("search_title").removeAttribute("disabled");
+  }else{
+    document.getElementById("search_title").setAttribute("disabled", true);
+  }
+
+  if(p_key >= 1){
+    document.getElementById("search_p_key").removeAttribute("disabled");
+  }else{
+    document.getElementById("search_p_key").setAttribute("disabled", true);
+  }
+}
+
+// function count_nic() {
+//     let nickname = document.getElementById("nickname").value.length;
+//     if(nickname >= 1){
+//       document.getElementById("search_nickname").removeAttribute("disabled");
+//     }else{
+//       document.getElementById("search_nickname").setAttribute("disabled", true);
+//     }
+//   }
+
+// function count_city() {
+//     let city = document.getElementById("city").value.length;
+//     if(city >= 1){
+//       document.getElementById("search_city").removeAttribute("disabled");
+//     }else{
+//       document.getElementById("search_city").setAttribute("disabled", true);
+//     }
+//   }
   
-function count_p_key() {
-    let p_key = document.getElementById("p_key").value.length;
-    if(p_key >= 1){
-      document.getElementById("search_p_key").removeAttribute("disabled");
-    }else{
-      document.getElementById("search_p_key").setAttribute("disabled", true);
-    }
-  }
+// function count_key() {
+//     let key = document.getElementById("key").value.length;
+//     if(key >= 1){
+//       document.getElementById("search_key").removeAttribute("disabled");
+//     }else{
+//       document.getElementById("search_key").setAttribute("disabled", true);
+//     }
+//   }
+
+// function count_title() {
+//     let title = document.getElementById("title").value.length;
+//     if(title >= 1){
+//       document.getElementById("search_title").removeAttribute("disabled");
+//     }else{
+//       document.getElementById("search_title").setAttribute("disabled", true);
+//     }
+//   }
+  
+// function count_p_key() {
+//     let p_key = document.getElementById("p_key").value.length;
+//     if(p_key >= 1){
+//       document.getElementById("search_p_key").removeAttribute("disabled");
+//     }else{
+//       document.getElementById("search_p_key").setAttribute("disabled", true);
+//     }
+//   }
 
 $(document).on('turbolinks:load', (function(){
       $('#search_nickname').click(function(){
