@@ -1,28 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+<nav class="head-nav navbar navbar-light" style="padding: 0px">
   <% if logged_in? %>
-    <%= current_user.nickname %>さん
-    <%= link_to "お知らせ", notifications_path, class: "far fa-bell" %>
-    <% if unchecked_notifications.any? %>
-      <i class="fa fa-circle notification-circle"></i>
-    <% end %>
-    <a class="nav-item nav-link" href="#"><i class="fas fa-cog"></i><p>設定</p></a>
+    <%= "#{current_user.nickname}さん" %>
+      <div class="notice">
+      <a class="nav-item nav-link nav-footer" href="/notifications" style="margin: 0px; padding: 0px;"><i class="far fa-bell fa-2x"></i><p style="margin: 0px;">お知らせ</p></a>
+      <% if unchecked_notifications.any? %>
+        <i class="fa fa-circle notification-circle notice_mark" style="color:tomato"></i>
+      <% end %>
+      </div>
+    <!--<a class="nav-item nav-link" href="#"><i class="fas fa-cog"></i><p>設定</p></a>-->
   <% else %>
    <a class="navbar-brand" href="/">App</a>
   <% end %>
     
-  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="margin-right:25px">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="navbar-collapse collapse" id="navbarNavAltMarkup"style="">
+  <div class="toggle-color navbar-collapse collapse" id="navbarNavAltMarkup">
     <% if logged_in? %>
-    <div class="navbar-nav">
-      <%= link_to "#{current_user.nickname}さんのプロフィール", u_show_path(current_user), class: "nav-item nav-link" %>
-      <%= link_to "新規投稿", p_new_path, class: "nav-item nav-link" %>
-      <%= link_to "投稿一覧", p_index_path, class: "nav-item nav-link" %>
-      <%= link_to "ユーザー一覧", u_index_path, class: "nav-item nav-link" %>
-      <%= link_to "ユーザー情報更新", u_edit_path(current_user), class: "nav-item nav-link" %>
-      <%= link_to "設定", root_path, class: "nav-item nav-link" %>
-      <%= link_to "ログアウト", logout_path, method: :delete, class: "nav-item nav-link" %>
+    <div class="navbar-nav nav-position">
+      <%= link_to "#{current_user.nickname}さんのプロフィール", u_show_path(current_user), class: "nav-item nav-link first-line nav-padi" %>
+      <%= link_to "ユーザー一覧", u_index_path, class: "nav-item nav-link nav-padi" %>
+      <%= link_to "新規投稿", p_new_path, class: "nav-item nav-link nav-padi" %>
+      <%= link_to "投稿一覧", p_index_path, class: "nav-item nav-link nav-padi" %>
+      <%= link_to "お気に入りユーザーの投稿一覧", p_like_path, class: "nav-item nav-link nav-padi" %>
+      <%= link_to "ユーザー情報更新", u_edit_path(current_user), class: "nav-item nav-link nav-padi" %>
+      <%= link_to "運営への問い合わせ", consultation_path, class: "nav-item nav-link nav-padi" %>
+      <%= link_to "ログアウト", logout_path, method: :delete, class: "nav-item nav-link nav-padi" %>
     </div>
     <% else %>
     <div class="navbar-nav">

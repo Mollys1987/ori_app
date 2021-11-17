@@ -1,3 +1,8 @@
+// body {
+//   max-width: 980px;
+//   margin: 0 auto;
+// }
+
 // @import "bootstrap-sprockets";
 // @import "bootstrap";
 
@@ -72,9 +77,58 @@
     display: block;
   }
 }
+// ヘッダーの通知マーク
+.head-nav {
+  position: relative;
+  height: 74px;
+  padding: 0px;
+}
+
+.notice {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+}
+
+.notice_mark {
+  position: absolute;
+  top: 15px;
+  left: 45px;
+}
+
+.nav-footer {
+  margin: 0 auto;
+  padding: 0 0 0 0px;
+  text-align: center;
+}
+
+.nav-footer p {
+  width: 80px;
+}
 
 .navbar {
   background-color: #ffd6ad;
+}
+
+.toggle-color {
+  background-color: #ffd6ad;
+}
+
+.nav-position {
+  text-align: right;
+}
+
+.first-line {
+  border-top: 3px solid;
+  margin-top: 35px;
+}
+
+.nav-padi {
+  margin-right: 25px;
+}
+
+.noti {
+  text-align: right;
 }
 
 .hide {
@@ -138,4 +192,125 @@
 /*ホバー時のデザイン*/
 .pagination>li>a:hover {        
   border-radius: 15px;    /*角を丸くする*/
+}
+
+/*==============
+LINE風フキダシ
+===============*/
+/*フレームとフォント*/
+.kaiwa.line {
+    width: 100%;
+    // max-width: 500px;
+    margin: 0 auto;
+    padding: 10px 0;
+    // background: #769ece;
+    font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Helvetica Neue", "Lucida Sans Unicode", "Arial";
+    font-size: 16px;
+    color: #333;
+    line-height: 1.4;
+    overflow: hidden;
+}
+/*フキダシ共通*/
+.kaiwa.line .fukidasi {
+    position: relative;
+    display: inline-block;
+    max-width: 192px;
+    margin: 8px 0 0;
+    padding: 9px 14px;
+    border-radius: 19px;
+    overflow-wrap: break-word;
+    clear: both;
+    box-sizing: content-box;/*はてな用*/
+}
+/*フキダシ左*/
+.kaiwa.line .fukidasi.left {
+    float: left;
+    margin-left: 62px;
+    background: #e6e6fa;
+}
+/*グループのときのフキダシ*/
+.kaiwa.line .name + .fukidasi.left {
+    margin-top: 5px;
+}
+/*フキダシ右*/
+.kaiwa.line .fukidasi.right {
+    float: right;
+    margin-right: 62px;
+    background: #ffd6ad;
+}
+
+.kaiwa.line .name {
+    clear: right;
+    color: black;
+}
+.nameright{
+  text-align: right;
+  margin-top: 15px;
+}
+
+/*相手の名前*/
+.kaiwa.line .name {
+    clear: right;
+    color: black;
+}
+/*ユーザアイコン*/
+.kaiwa.line .icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: -54px;
+    top: -2px;
+    border-radius: 20px;
+}
+
+.iconright {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: -54px;
+    top: -2px;
+    border-radius: 20px;
+    position: absolute;
+}
+
+/*グループのときのユーザアイコン*/
+.kaiwa.line .name + .left .icon {
+    // top: -1.8em;
+    // padding-bottom: 10px;
+}
+/*しっぽ共通*/
+.kaiwa.line .fukidasi::after {
+    position: absolute;
+    content: "";
+    width: 24px;
+    height: 36px;
+    top: -5px;
+}
+/*しっぽ左*/
+.kaiwa.line .fukidasi.left:after {
+    left: -10px;
+    border-radius: 18px 0 6px 18px/18px 0 1px 18px;
+    box-shadow: -3px -15px 0 -5px #e6e6fa inset;
+}
+/*しっぽ右*/
+.kaiwa.line .fukidasi.right::after {
+    right: -10px;
+    border-radius: 0 18px 18px 6px/0 18px 18px 1px;
+    box-shadow: inset 3px -15px 0 -5px #ffd6ad;
+}
+/*フキダシが続いてしっぽがないとき*/
+.kaiwa.line .left + .left::after,
+.kaiwa.line .right + .right::after {
+    content: none;
+}
+
+.mes_des {
+  position: absolute;
+  margin: 50px 0px;
+  right: 15px;
+}
+
+.mes-form {
+  margin: 0 auto;
+  text-align: center;
 }

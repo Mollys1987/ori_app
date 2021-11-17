@@ -1,9 +1,9 @@
-  <nav class="navbar navbar-expand-lg navbar-light fixed-bottom">
+  <nav class="navbar fixed-bottom">
     <% if logged_in? %>
-    <a class="nav-item nav-link" href="/post_like"><i class="fas fa-home fa-fw"></i><p>トップ画面</p></a>
-    <a class="nav-item nav-link" href="/search_func"><i class="fas fa-search"></i><p>検索</p></a>
-    <a class="nav-item nav-link" href="/post_new"><i class="far fa-edit"></i><p>新規投稿</p></a>
-    <a class="nav-item nav-link" href="/room/index/<%= current_user.id %>"><i class="far fa-paper-plane"></i><p>メッセージ</p></a>
-    <a class="nav-item nav-link" href="/user/show/<%= current_user.id %>"><i class="far fa-smile"></i><p>マイページ</p></a>
+      <a class="nav-item nav-link nav-footer" href="/post_index" style="margin: 0px; padding: 0px;"><i class="far fa-list-alt fa-2x"></i><p style="margin: 0px;">投稿一覧</p></a>
+      <a class="nav-item nav-link nav-footer" href="/search_func" style="margin: 0px; padding: 0px;"><i class="fas fa-search fa-2x"></i><p style="margin: 0px;"> 検索 </p></a>
+      <a class="nav-item nav-link nav-footer" href="/post_new" style="margin: 0px; padding: 0px;"><i class="far fa-edit fa-2x"></i><p style="margin: 0px;">新規投稿</p></a>
+      <a class="nav-item nav-link nav-footer" href="/room/index/<%= current_user.id %>" style="margin: 0px; padding: 0px;"><i class="far fa-paper-plane fa-2x"></i><p style="margin: 0px;">メッセージ</p></a>
+      <a class="nav-item nav-link nav-footer" href="/user/show/<%= current_user.id %>" style="margin: 0px; padding: 0px;"><i class="far fa-smile fa-2x"></i><p style="margin: 0px;">マイページ</p></a>
     <% end %>
   </nav>

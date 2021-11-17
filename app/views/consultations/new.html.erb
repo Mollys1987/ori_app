@@ -1,0 +1,17 @@
+<div class="container" style="margin-top: 15px">
+  <%= form_with(model: @consultation, url: {controller: 'consultations', action: 'create' }) do |f| %>
+    
+    
+    <div class="form-group">
+      <label>管理者への問い合わせ内容</label><br>
+      <%= f.select :title, [["機能改善の提案", "機能改善の提案"], ["投稿削除依頼", "投稿削除依頼"], ["コメント削除依頼", "コメント削除依頼"], ["メッセージ削除依頼", "メッセージ削除依頼"], ["その他", "その他"]], include_blank: "選択して下さい" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :content, value="問い合わせ内容の詳細を記載してください" %>
+      <%= f.text_area :content, class: 'form-control', rows: "7" %>
+    </div>
+    
+    <%= f.submit "お問い合わせ内容を送信", class: "btn btn-primary btn-lg" %>
+  <% end %>
+</div>

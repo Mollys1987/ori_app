@@ -47,4 +47,8 @@ Rails.application.routes.draw do
   resources :notifications, only: :index
   
   delete 'user_delete/:id', to: 'users#destroy', as: 'u_des'
+  
+  get  'consultation',      to: 'consultations#new',   as: 'consultation'
+  post 'consultation_send', to: 'consultations#create',  as: 'cons_create'
+  get  'acceptance',        to: 'consultations#accep', as: 'accep'
 end

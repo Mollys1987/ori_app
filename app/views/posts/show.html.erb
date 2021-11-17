@@ -6,7 +6,7 @@
           <% else %>
             <i class="fas fa-user fa-3x"></i>
           <% end %>
-      <%= @post.user.nickname %>
+      <%= link_to @post.user.nickname, u_show_path(@post.user.id) %>
     </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
