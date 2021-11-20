@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   get    '/login',         to: 'sessions#new',       as: 'login'
   post   '/login',         to: 'sessions#create'
   delete '/logout',        to: 'sessions#destroy'
+  get    '/edit',          to: 'sessions#edit',      as: 're_log'
+  patch  '/update/login',        to: 'sessions#update',    as: 'log_upd'
 
   get  'room/index/:id',               to: 'rooms#index',   as: 'room'
   get  'chat/:room_id',                to: 'rooms#chat',    as: 'exist_room'

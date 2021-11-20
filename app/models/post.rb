@@ -11,6 +11,7 @@ class Post < ApplicationRecord
     mount_uploader :video, VideoUploader
     validates :title, presence: true, length: { maximum: 50 }
     validates :content, presence: true, length: { maximum: 255 }
+    validates :key_word1, presence: { message: 'は１つは入力してください。' }
     validates :user_id, presence: true
     validate  :picture_size
     

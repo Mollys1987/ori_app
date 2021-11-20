@@ -35,4 +35,37 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
   
+  def edit
+    p params
+  end
+  
+  def update
+    p'1====================='
+    if params[:session][:nickname].presence
+    p'2====================='
+      user = User.find_by(nickname: params[:session][:nickname])
+    p'3====================='
+      if user == nil
+        flash.now[:danger] = 'ユーザー登録がありません'
+        render :edit
+        return
+      end
+    end
+    if user.age == params[:session][:age] && user.sex  == params[:session][:sex] && user.city == params[:session][:city]
+      user.update_attributes(answer_digest: BCrypt::Password.create(params[:session][:answer_digest]))
+      log_in user
+      remember(user)
+      redirect_to p_index_path
+    else
+      flash.now[:danger] = '入力情報に誤りがあります'
+      render :edit
+      return
+    end
+  end
+  
+  private
+    def login_params
+      params.require(:session).permit(:nickname, :age, :sex, :city, :answer_digest)
+    end
+  
 end

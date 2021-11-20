@@ -9,6 +9,15 @@ class ApplicationController < ActionController::Base
     return exist_room
   end
   
+  def send_mail(consultation)
+    @consultation = consultation
+    mail(
+      from: ENV['ADD'],
+      to:   ENV['ADD'],
+      subject: 'お問い合わせ通知'
+    )
+  end
+  
   private
 
     # ユーザーのログインを確認する

@@ -24,11 +24,15 @@ class User < ApplicationRecord
   has_many :receiver, class_name: "Consultation", foreign_key: "receiver_id", dependent: :destroy
   attr_accessor :remember_token
   
-  validates :nickname, presence: true, length: { maximum: 255 },
+  validates :nickname, presence: true, length: { maximum: 30 },
                        uniqueness: true
-                    
-  
+  validates :prefucture, presence: true
+  validates :city, presence: true
+  validates :classification, presence: true
+  validates :nursing, presence: true
+  validates :key_word1, presence: { message: 'は１つは入力してください。' }
   validates :answer_digest, presence: true
+  
   mount_uploader :profile_image, ProfileImageUploader
   
   def User.digest(string)

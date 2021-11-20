@@ -12,6 +12,9 @@ class ConsultationsController < ApplicationController
     @consultation.receiver_id = 1
     p @consultation
     if @consultation.save
+      p '1===================='
+      ConsultationsMailer.send_mail(@consultation).deliver_now
+      p '2===================='
       redirect_to accep_path
     else
       flash[:danger] = "送信失敗しました"
