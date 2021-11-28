@@ -2,21 +2,22 @@
   <% if logged_in? %>
     <h1>user/showの個別ページを表示</h1>
   <% else %>
-    <div class="container" style="margin-top: 15px">
+    <div class="container" style="margin-top: 15px; text-align:center;" >
       <div class="jumbotron">
-        <h1 class="display-4">アプリ名</h1>
-        <p class="lead">キャッチフレーズ</p>
-        <img src="/assets/top.jpg" alt="" width="100%">
+        <h1 class="display-4">つながり</h1>
+        <p class="lead">介護をする人、うける人、支える人のSNS</p>
+        <img src="/assets/top.jpg" alt="" width="100%" style="border-radius: 20px;">
         <hr class="my-4">
         <ul>
-          <li>アプリの説明①</li>
-          <li>アプリの説明①</li>
-          <li>アプリの説明①</li>
+          <li>介護をする人、うける人へ、日々の様子や悩みを抱え込まず発信してみよう。</li>
+          <li>その発信によって共感を得られたり、日々の介護の改善につながるかもしれません。</li>
+          <li>介護を支える介護・医療職の人へ、あなたの知識や経験、日々の介護での出来事などを発信してください。</li>
+          <li>あなたの発信が悩みや困り事を解決する手助けになるかもしれません。</li>
         </ul>
       </div>
-      <button><%= link_to "新規登録", u_new_path, class: "nav-item nav-link" %></button>
+      <button class="entry" style="margin-bottom: 30px;"><%= link_to "新規登録", u_new_path, class: "nav-item nav-link" %></button>
       <br>
-      <button><%= link_to "ログイン", login_path, class: "nav-item nav-link" %></button>
+      <button class="entry"><%= link_to "ログイン", login_path, class: "nav-item nav-link" %></button>
       <p></p>
     </div>
   <% end %>

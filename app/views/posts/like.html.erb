@@ -1,50 +1,43 @@
 <div class="container" style="margin-top: 15px">
-<h1>お気に入りユーザーの投稿一覧</h1>
-<table class="table table-hover">
+  <h3 class="title">お気に入りユーザーの
+  <br>投稿一覧</h3>
+
+    
   <% @follow_users.each do |fu| %>
-    <% fu.posts.each do |lp|%>
-      <thead>
-        <tr>
-          <th scope="col">投稿者</th>
-          <th scope="col">投稿タイトル</th>
-          <th scope="col">投稿日時</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><% if fu.profile_image? %>
-                <%= image_tag fu.user.profile_image.url, class: "icon_size" %>
-              <% else %>
-                <i class="fas fa-user fa-3x"></i>
-              <% end %>
-              <%= link_to fu.nickname, u_show_path(fu.id) %>
-          </td>
-          <td><%= link_to lp.title, p_show_path(lp.id) %></td>
-          <td><%= lp.created_at.to_s(:datetime_jp) %></td>
-        </tr>
-      </tbody>
-      <thead>
-        <tr>
-          <th colspan="5" scope="col" text-algn="center">投稿キーワード</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= "#1#{lp.key_word1}" %></td>
-          <td><%= "#2#{lp.key_word2}" %></td>
-          <td><%= "#3#{lp.key_word3}" %></td>
-          <td><%= "#4#{lp.key_word4}" %></td>
-          <td><%= "#5#{lp.key_word5}" %></td>
-        </tr>
-      </tbody>  
-    </table>
+    <% fu.posts.each do |lp| %>
+      <div class="card">
+        <div class="card-header">
+          <% if fu.profile_image? %>
+            <%= image_tag fu.profile_image.url, class: "rounded-circle", size: "30x30" %>
+          <% else %>
+            <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
+          <% end %>
+          <%= link_to fu.nickname, u_show_path(fu.id) %>
+        </div>
+        <div class="card-body">
+          <b>タイトル：</b><%= link_to lp.title, p_show_path(lp.id) %>
+          <br>
+          <br>
+          <b>検索キーワード：</b>
+          <br>
+          <%= "#1.#{lp.key_word1}" %>&emsp; <%= "#2.#{lp.key_word2}" %>&emsp; <%= "#3.#{lp.key_word3}" %>&emsp;
+          <%= "#4.#{lp.key_word4}" %>&emsp; <%= "#5.#{lp.key_word5}" %>&emsp;
+          <br>
+          <br>
+          <b>投稿日時：</b><%= lp.created_at.to_s(:datetime_jp) %>
+          <br>
+        </div>
+      </div>
     <% end %>
     <% if fu.posts == [] %>
-      <td>お気に入りユーザーの投稿がありません</td>
+      ※まだ<%= link_to fu.nickname, u_show_path(fu.id) %> さんの
+      <br>&emsp;投稿はありません
+      <br>
+      <br>
     <% end %>
   <% end %>
-</table>
-    <% if @follow_users == [] %>
-      <h3><b>まだお気に入り登録しているユーザーがいません</b></h3>
-    <% end %>
+  <% if @follow_users == [] %>
+    <p style="margin-top:10%; text-align:center;">まだお気に入り登録している
+    <br>ユーザーがいません</p>
+  <% end %>
 </div>

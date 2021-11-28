@@ -7,7 +7,7 @@
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
-      <% if @users.any? %>
+      <% if @users %>
         <div class="user_avatars">
           <% @users.each do |user| %>
             <% user.nickname %>
@@ -18,9 +18,11 @@
   </aside>
   <div class="col-md-8">
     <h3><%= @title %></h3>
-    <% if @users.any? %>
+    <% if @users %>
       <ul class="users follow">
-        
+        <% @users.each do |user| %>
+            <% user.nickname %>
+          <% end %>
       </ul>
     <% end %>
   </div>

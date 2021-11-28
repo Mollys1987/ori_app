@@ -1,7 +1,24 @@
-// body {
-//   max-width: 980px;
-//   margin: 0 auto;
-// }
+body {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.title{
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.space {
+  margin-bottom: 5px;
+}
+
+.space2 {
+  margin-left: 10%;
+}
+
+.center {
+  margin: 0 auto;
+}
 
 // @import "bootstrap-sprockets";
 // @import "bootstrap";
@@ -80,20 +97,20 @@
 // ヘッダーの通知マーク
 .head-nav {
   position: relative;
-  height: 74px;
+  height: 58px;
   padding: 0px;
 }
 
 .notice {
   position: absolute;
   top: 10px;
-  right: 80px;
+  right: 100px;
 }
 
 .notice_mark {
   position: absolute;
-  top: 15px;
-  left: 45px;
+  top: 10px;
+  left: 35px;
 }
 
 .nav-footer {
@@ -103,24 +120,41 @@
 }
 
 .nav-footer p {
-  width: 80px;
+  width: 65px;
+  font-size: 12px;
 }
 
 .navbar {
   background-color: #ffd6ad;
+  z-index: 100;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 .toggle-color {
   background-color: #ffd6ad;
 }
 
+button:focus {
+  outline: 3px auto gray;
+}
+
 .nav-position {
   text-align: right;
+  position: relative;
+  z-index: 100;
+}
+
+.entry {
+  border: none;
+  background-color: #ffd6ad;
+  border-radius: 20px;
 }
 
 .first-line {
   border-top: 3px solid;
   margin-top: 35px;
+  color: gray;
 }
 
 .nav-padi {
@@ -135,10 +169,10 @@
   display: none;
 }
 
-.icon_size {
-  width: auto;
-  height: 50px;
-}
+// .icon_size {
+//   width: auto;
+//   height: 50px;
+// }
 
 .right {
   display: flex;
@@ -153,20 +187,6 @@
 .edit_delete {
   text-align: right;
   margin-right: 5%;
-}
-
-#comment_form {
-  display: none;
-}
-
-.hide_btn {
-  border: none;
-  background-color: none;
-  color: none;
-}
-
-#reply_form {
-  display: none;
 }
 
 .debug {
@@ -194,6 +214,7 @@
   border-radius: 15px;    /*角を丸くする*/
 }
 
+// メッセージ機能193~313
 /*==============
 LINE風フキダシ
 ===============*/
@@ -313,4 +334,119 @@ LINE風フキダシ
 .mes-form {
   margin: 0 auto;
   text-align: center;
+}
+
+
+// コメント機能
+.reply {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.reply_form {
+  display: none;
+}
+
+#comment_form {
+  display: none;
+}
+
+.hide_btn {
+  border: none;
+  background-color: white;
+}
+
+#reply_form {
+  display: none;
+}
+
+#comment button {
+  background-color: none;
+  color: none;
+}
+
+// プロフィールページ
+.prof {
+  position: relative;
+  width: 100%;
+}
+
+.prof-icon {
+  position: relative;
+  margin-left: 5%;
+}
+
+.status {
+  position: absolute;
+  right: 8%;
+  top: 48px;
+}
+
+.pfof-text {
+  margin-top: 5%;
+}
+
+.pfof-text p {
+  overflow-wrap: break-word;
+}
+
+.status p {
+  font-size: 1rem;
+}
+
+.align {
+  width: 96px;
+}
+
+// 入力フォーム
+.red {
+  color: red;
+}
+
+// 検索ページ
+.search {
+  display: flex;
+  flex-direction: column;
+}
+
+.s_btn {
+  border: none;
+  background-color: #ffd6ad;
+  border-radius: 20px;
+  margin: 3% 20%;
+  outline-color: gray;
+}
+
+// .btn button:focus {
+//     outline: none;
+//   }
+
+.s_window {
+  text-align: center;
+  margin: 5% 0;
+}
+
+#table_nickname {
+  margin: 0 auto;
+}
+
+#table_city {
+  margin: 0 auto;
+}
+
+#table_key {
+  margin: 0 auto;
+}
+
+#table_title {
+  margin: 0 auto;
+}
+
+#table_p_key {
+  margin: 0 auto;
+}
+
+.result {
+  margin: 3%;
+  text-align: left;
 }

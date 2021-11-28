@@ -5,7 +5,22 @@
         <%= f.text_field :title, class: 'form-control' %>
         
         <%= f.label :content %>
-        <%= f.text_field :content, class: 'form-control' %>
+        <%= f.text_area :content, class: 'form-control', rows: "10" %>
+        
+        <%= f.label :key_word1, value="検索キーワード1"%>
+        <%= f.text_field :key_word1, class: 'form-control' %>
+        
+        <%= f.label :key_word2, value="検索キーワード2"%>
+        <%= f.text_field :key_word2, class: 'form-control' %>
+        
+        <%= f.label :key_word3, value="検索キーワード3"%>
+        <%= f.text_field :key_word3, class: 'form-control' %>
+        
+        <%= f.label :key_word4, value="検索キーワード4"%>
+        <%= f.text_field :key_word4, class: 'form-control' %>
+        
+        <%= f.label :key_word5, value="検索キーワード5"%>
+        <%= f.text_field :key_word5, class: 'form-control' %>
         
         <%= f.submit "編集", class: "btn btn-primary btn-lg btn-lg"%>
     <% end %>

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post 'user/create',    to: 'users#create', as: 'u_create'
   get  'user/index',     to: 'users#index',  as: 'u_index'
   get  'user/show/:id',  to: 'users#show',   as: 'u_show'
+  get  'user/status/:id',    to: 'users#status',  as: 'u_sts'
   get  'user/edit',      to: 'users#edit',   as: 'u_edit'
   patch'user/update',    to: 'users#update', as: 'u_up'
   resources :users do

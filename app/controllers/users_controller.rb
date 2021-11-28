@@ -26,11 +26,13 @@ class UsersController < ApplicationController
     p'show============'
     @user = User.find(params[:id])
     p'show_end=========='
+    @posts = Kaminari.paginate_array(@user.posts).page(params[:page]).per(10)
   end
   
   def index
     @admin = User.find(1)
     @users = User.order("RANDOM()").all
+    # @users = User.all
     @users = Kaminari.paginate_array(@users).page(params[:page])
   end
   
@@ -48,6 +50,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def status
+    @user = User.find(params[:id])
+  end
+
   def following
     @title = "Following"
     @user  = User.find(params[:id])

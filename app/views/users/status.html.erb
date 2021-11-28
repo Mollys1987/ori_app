@@ -1,0 +1,9 @@
+<%= render 'shared/stats' %>
+
+<section class="stats">
+    <h3>お気に入りしている投稿</h3>
+      <% @user.liked_posts.each do |post| %>
+        <%= link_to post.user.nickname, u_show_path(post.user.id) %>
+        <%= link_to post.title, p_show_path(post.id)%>
+      <% end %>
+    </section>

@@ -8,31 +8,31 @@
     
     <div class="form-group">
       <label>年代</label><br>
-      <label><%= f.radio_button :age, "10s" %>10代</label>
-      <label><%= f.radio_button :age, "20s" %>20代</label>
-      <label><%= f.radio_button :age, "30s" %>30代</label>
-      <label><%= f.radio_button :age, "40s" %>40代</label>
-      <label><%= f.radio_button :age, "50s" %>50代</label>
-      <label><%= f.radio_button :age, "60s" %>60代</label>
-      <label><%= f.radio_button :age, "70s" %>70代</label>
-      <label><%= f.radio_button :age, "80s" %>80代</label>
-      <label><%= f.radio_button :age, "90s" %>90代</label>
+      <label><%= f.radio_button :age, "10歳代" %>10歳代</label>
+      <label><%= f.radio_button :age, "20歳代" %>20歳代</label>
+      <label><%= f.radio_button :age, "30歳代" %>30歳代</label>
+      <label><%= f.radio_button :age, "40歳代" %>40歳代</label>
+      <label><%= f.radio_button :age, "50歳代" %>50歳代</label>
+      <label><%= f.radio_button :age, "60歳代" %>60歳代</label>
+      <label><%= f.radio_button :age, "70歳代" %>70歳代</label>
+      <label><%= f.radio_button :age, "80歳代" %>80歳代</label>
+      <label><%= f.radio_button :age, "90歳代" %>90歳代</label>
     </div>
     
     <div class="form-group">
       <label>性別</label>
       <br>
-      <label><%= f.radio_button :sex, "men" %>男性</label>
-      <label><%= f.radio_button :sex, "fimale" %>女性</label>
+      <label><%= f.radio_button :sex, "男性" %>男性</label>
+      <label><%= f.radio_button :sex, "女性" %>女性</label>
     </div>
     
     <div class="form-group">
-      <%= f.label :city, value="住所（市町村）" %>
+      <%= f.label :city, value="住所（市区町村）" %><span class="red">※市区町村まで記載してください（○○区、○○市、○○村など）</span> 
       <%= f.text_field :city, id: 'city', class: 'form-control'  %>
     </div>
 
     <div class="form-group">
-      <%= f.label :answer_digest, value="好きな食べ物はなんですか？" %>
+      <%= f.label :answer_digest, value="好きな食べ物はなんですか？" %><span class="red">※漢字やカタカナなど統一した記載にしてください</span>
       <%= f.text_field :answer_digest, class: 'form-control' %>
     </div>
     

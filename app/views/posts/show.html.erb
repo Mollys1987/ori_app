@@ -2,9 +2,10 @@
   <div class="card">
     <div class="card-header">
       <% if @post.user.profile_image? %>
-            <%= image_tag @post.user.profile_image.url, class: "icon_size" %>
+            <%= image_tag @post.user.profile_image.url, class: "rounded-circle", size: "30x30" %>
           <% else %>
-            <i class="fas fa-user fa-3x"></i>
+            <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
+            <!--<i class="fas fa-user fa-3x"></i>-->
           <% end %>
       <%= link_to @post.user.nickname, u_show_path(@post.user.id) %>
     </div>
@@ -25,13 +26,15 @@
     </div>
     <% end %>
   </div>
+    <button class="hide_btn">
     <% if current_user.already_liked?(@post) %>
       <a href="/posts/<%= @post.id %>/likes/<%= current_user.id%>" data-method="delete"><i class="fas fa-heart"></i>取り消し</a>
     <% else %>
       <a href="/posts/<%= @post.id %>/likes" data-method="post"><i class="far fa-heart"></i>お気に入り</a>
     <% end %>
+    </button>
     <button id="comment" class="hide_btn"><i class="far fa-comments"></i>コメントする</button>
-    
+    <!--<a id="comment"><i class="far fa-comments"></i>コメントする</a>-->
     <div id="comment_form" class="card my-1"> 
       <div class="card-body">
         <p class="font-weight-bold">投稿へのコメント</p>
@@ -49,22 +52,25 @@
           <div class="card">
             <div class="card-header">
               <% if c.user.profile_image? %>
-                <%= image_tag c.user.profile_image.url, class: "icon_size" %>
+                <%= image_tag c.user.profile_image.url, class: "rounded-circle", size: "30x30" %>
               <% else %>
-                <i class="fas fa-user fa-3x"></i>
+                <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
               <% end %>
               <%= link_to c.user.nickname, u_show_path(c.user.id) %>
             </div>
             <div class="card-body">
+              <!--<b><%= "#{c.post.user.nickname}さんへ" %></b>-->
+              <!--<br>-->
               <%= c.content %>
               <br>
+              <br>
               <%= "コメント時間：#{date_format(c.created_at)}" %>
+              <br>
               <% if current_user.id == c.user_id%>
                 <%= link_to "コメントの削除", com_des_path(c.id), method: :delete %>
               <% end %>
             </div>
-          <!--</div>-->
-            <!--<button class="reply" class="hide_btn">コメントに返信する</button>-->
+              <a href="#" class="reply">返信</a>
               <div class="reply_form">
                 <%= form_for(@reply, url: reply_path(comment_id: c.id, user_id: current_user.id)) do |f| %>
                   <%= f.text_field :re_comment %>
@@ -78,21 +84,23 @@
                     <div class="card rep">
                       <div class="card-header">
                         <% if rep.user.profile_image? %>
-                          <%= image_tag rep.user.profile_image.url, class: "icon_size" %>
+                          <%= image_tag rep.user.profile_image.url, class: "rounded-circle", size: "30x30" %>
                         <% else %>
-                          <i class="fas fa-user fa-3x"></i>
+                          <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
                         <% end %>
                         <%= link_to rep.user.nickname, u_show_path(rep.user.id) %>
                       </div>
                       <div class="card-body">
                         <%= rep.re_comment %>
                         <br>
+                        <br>
                         <%= "コメント時間：#{date_format(rep.created_at)}" %>
+                        <br>
+                        <% if current_user.id == rep.user_id%>
+                          <%= link_to "コメントの削除", rep_des_path(rep.id), method: :delete %>
+                        <% end %>
                       </div>
-                      <% if current_user.id == rep.user_id%>
-                        <%= link_to "コメントの削除", rep_des_path(rep.id), method: :delete %>
-                      <% end %>
-                      <!--<button class="reply" class="hide_btn">コメントに返信する</button>-->
+                      <a href="#" class="reply">返信</a>
                         <div class="reply_form">
                           <%= form_for(@reply, url: reply_path(comment_id: c.id, user_id: current_user.id)) do |f| %>
                             <%= f.text_field :re_comment %>
@@ -116,7 +124,10 @@
         $('#comment_form').fadeIn();
     })
     
-  document.getElementsByClassName('reply').click(function() {
-        $('#reply_form').fadeIn();
+  document.querySelectorAll('.reply').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      el.nextElementSibling.style = 'display: block;'
     })
+  })
 </script>

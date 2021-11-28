@@ -24,6 +24,11 @@ class PostsController < ApplicationController
   def like
     @user = current_user
     @follow_users = @user.following
+    # @follow_users.each do |fu|
+    #   fu.posts.each do |lp|
+    #     @posts = Kaminari.paginate_array(lp).page(params[:page]).per(10)
+    #   end
+    # end
   end
   
   def show
@@ -43,7 +48,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      flash[:success] = "Post updated"
+      flash[:success] = "投稿内容を更新しました"
       redirect_to p_show_path
     else
       render :edit
