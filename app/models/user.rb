@@ -26,6 +26,8 @@ class User < ApplicationRecord
   
   validates :nickname, presence: true, length: { maximum: 30 },
                        uniqueness: true
+  validates :age, presence: true
+  validates :sex, presence: true
   validates :prefucture, presence: true
   validates :city, presence: true
   validates :classification, presence: true

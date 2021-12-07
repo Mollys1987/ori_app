@@ -1,6 +1,8 @@
 <div class="container" style="margin-top: 15px">
+  <h3 class="title"><%= @user.nickname %></h3>
+    <p class="title">さんのページ</p>
+  
   <div class="prof">
-    <h3 class="title"><%= @user.nickname %>さんのページ</h3>
     <div class="prof-icon">
       <% if @user.profile_image? %>
         <%= image_tag @user.profile_image.url, class: "rounded-circle", size: "130x130" %>
@@ -21,17 +23,6 @@
         <br>
         <span class="align">介護の対象：</span><%= @user.nursing %>
         </p>
-        <!--<p>-->
-        <!--<%= "年代：#{@user.age}" %>-->
-        <!--<br>-->
-        <!--<%= "性別：#{@user.sex}" %>-->
-        <!--<br>-->
-        <!--<%= "居住地：#{@user.prefucture}" %>-->
-        <!--<br>-->
-        <!--<%= "分類：#{@user.classification}" %>-->
-        <!--<br>-->
-        <!--<%= "介護の対象：#{@user.nursing}" %>-->
-        <!--</p>-->
       </div>
   </div>
   <hr>
@@ -45,42 +36,16 @@
     </div>
     <hr>
   </div>
-    <section class="stats"> 
-      <button class="entry"><%= link_to "#{@user.nickname}さんのお気に入り一覧", u_sts_path("#{@user.id}") %></button>
-      <!--<%= render 'shared/stats' %>-->
-      
-    </section>
-    <!--<section class="stats">-->
-    <!--<h3>お気に入りしている投稿</h3>-->
-    <!--  <% @user.liked_posts.each do |post| %>-->
-    <!--    <%= link_to post.user.nickname, u_show_path(post.user.id) %>-->
-    <!--    <%= link_to post.title, p_show_path(post.id)%>-->
-    <!--  <% end %>-->
-    <!--</section>-->
+  <div class="sns-zone">
+    <button class="sns-btn" style="padding:10px 18px;"><%= link_to "#{@user.nickname}さんのお気に入り一覧", u_sts_path("#{@user.id}") %></button>
     <%= render 'follow_form' if logged_in? %>
     <% unless current_user == @user %>
-      <button class="entry"><%= link_to "#{@user.nickname}さんにメッセージを送る", chat_path(sender_id: current_user.id, receiver_id: @user.id) %></button>
+      <button class="sns-btn"><%= link_to "#{@user.nickname}さんにメッセージを送る", chat_path(sender_id: current_user.id, receiver_id: @user.id) %></button>
     <% end %>
+    <!--<%= render 'shared/stats' %>-->
+  </div>
 <hr>
 <h3 class="title">投稿一覧(全<%= @user.posts.count %>投稿）</h3>
-<!--<table class="table table-hover">-->
-<!--  <thead>-->
-<!--    <tr>-->
-<!--      <th scope="col">タイトル</th>-->
-<!--      <th scope="col">作成日時</th>-->
-<!--      <th scope="col">検索キーワード</th>-->
-<!--    </tr>-->
-<!--  </thead>-->
-<!--  <tbody>-->
-<!--    <% @user.posts.each do |post| %>-->
-<!--    <tr>-->
-<!--      <td><%= link_to post.title, p_show_path(post.id) %></td>-->
-<!--      <td><%= post.created_at.to_s(:datetime_jp) %></td>-->
-<!--      <td><%= "#1.#{post.key_word1},#2.#{post.key_word2},#3.#{post.key_word3},#4.#{post.key_word4},#5.#{post.key_word5}," %></td>-->
-<!--    </tr>-->
-<!--    <% end %>-->
-<!--  </tbody>-->
-<!--</table>-->
   
   <% @posts.each do |post| %>
     <div class="card">

@@ -1,5 +1,5 @@
 <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
              html: { method: :delete },
              remote: true) do |f| %>
-  <%= f.submit "お気入り解除", class: "entry" %>
+  <a><%= f.submit "#{@user.nickname}さんをお気入り解除", class: "sns-btn", style: "padding:10px 18px;" %></a>
 <% end %>

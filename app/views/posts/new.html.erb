@@ -1,39 +1,70 @@
 <div class="container" style="margin-top: 15px">
+  <h3 class="title">新しい記事の投稿</h3>
     <%= form_for(@post, url: p_create_path) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
         <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control' %>
-        
+        <%= f.text_field :title, class: 'form-control', placeholder: "タイトルを入力" %>
+        <br>
         <%= f.label :content %>
-        <%= f.text_area :content, class: 'form-control', rows: "10" %>
+        <%= f.text_area :content, class: 'form-control', rows: "10", placeholder: "本文を入力" %>
         
-        <%= f.label :key_word1, value="検索キーワード"%>
-        <%= f.text_field :key_word1, class: 'form-control' %>
-        
-        <%= f.label :key_word2, value="検索キーワード"%>
-        <%= f.text_field :key_word2, class: 'form-control' %>
-        
-        <%= f.label :key_word3, value="検索キーワード"%>
-        <%= f.text_field :key_word3, class: 'form-control' %>
-        
-        <%= f.label :key_word4, value="検索キーワード"%>
-        <%= f.text_field :key_word4, class: 'form-control' %>
-        
-        <%= f.label :key_word5, value="検索キーワード"%>
-        <%= f.text_field :key_word5, class: 'form-control' %>
-        
+        <div id="key_word">
+          <div class="balloon3" >
+            <p>投稿内容に関連する単語を記入してください。
+            <br>他のユーザーがあなたの投稿を探すのに役立つ検索ワードです。
+            <br>検索キーワード１は必ず入力してください。
+            </p>
+          </div>
+          <%= f.label :key_word1, value="検索キーワード１" %><span class="red"> ※必ず入力してください。</span>
+          <%= f.text_field :key_word1, class: 'form-control', placeholder: "キーワードを入力　例：認知症" %>
+          
+          <%= f.label :key_word2, value="検索キーワード２" %>※任意
+          <%= f.text_field :key_word2, class: 'form-control', placeholder: "キーワードを入力　例：介護疲れ" %>
+          
+          <%= f.label :key_word3, value="検索キーワード３" %>※任意
+          <%= f.text_field :key_word3, class: 'form-control', placeholder: "キーワードを入力　例：腰痛" %>
+          
+          <%= f.label :key_word4, value="検索キーワード４" %>※任意
+          <%= f.text_field :key_word4, class: 'form-control', placeholder: "キーワードを入力　例：リハビリ" %>
+          
+          <%= f.label :key_word5, value="検索キーワード５" %>※任意
+          <%= f.text_field :key_word5, class: 'form-control', placeholder: "キーワードを入力　例：介護日記" %>
+        </div>
+        <div style="margin:25px 0px;"></div>
+        <div id="pic-mov">
         <span class="picture">
-         <%= f.label :"写真" %>
-         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+         <%= f.label :"写真１" %>
+         <%= f.file_field :picture1, accept: 'image/jpeg,image/gif,image/png' %>
+         <br>
+         <%= f.label :"写真２" %>
+         <%= f.file_field :picture2, accept: 'image/jpeg,image/gif,image/png' %>
+         <br>
+         <%= f.label :"写真３" %>
+         <%= f.file_field :picture3, accept: 'image/jpeg,image/gif,image/png' %>
+         <br>
+         <%= f.label :"写真４" %>
+         <%= f.file_field :picture4, accept: 'image/jpeg,image/gif,image/png' %>
+         <br>
+         <%= f.label :"写真５" %>
+         <%= f.file_field :picture5, accept: 'image/jpeg,image/gif,image/png' %>
         </span>
         <br>
+        <div style="margin:25px 0px;"></div>
         <span class="video">
          <%= f.label :"動画" %>
          <%= f.file_field :video, :accept => 'video/*' %>
         </span>
+        <div class="balloon1-top">
+          <p>投稿時の表示は写真１～５の順で、最後に動画が表示されます。
+          <br>写真は1枚あたり容量5MB以下までしか投稿できません。
+          </p>
+        </div>
+        </div>
         <br>
-        <%= f.submit "投稿", class: "btn btn-primary btn-lg btn-lg"%>
-        
+        <div style="margin:25px 0px;"></div>
+        <div style="text-align:center;">
+          <%= f.submit "投稿", class: "btn1" %>
+        </div>
     <% end %>
 </div>
 
@@ -44,6 +75,28 @@
       alert('Maximum file size is 5MB. Please choose a smaller file.');
     }
   });
+  
+  $("#key_word").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon3").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon3").fadeOut();
+      }
+  );
+});
+
+  $("#pic-mov").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
 </script>
 
 

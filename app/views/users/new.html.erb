@@ -1,14 +1,15 @@
 <div class="container" style="margin-top: 15px">
   <%= form_for(@user, url: u_create_path) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    
-    <div class="form-group">
-      <%= f.label :nickname, value="ニックネーム（アプリに表示される名前）" %>
-      <%= f.text_field :nickname, class: 'form-control' %>
+
+    <div class="form-group" id="nickname">
+      <b><%= f.label :nickname, value="ニックネーム" %></b>
+      <%= f.text_field :nickname, class: 'form-control', placeholder: "アプリに表示される名前です" %>
+      <!--<p class="popup">アプリに表示されるユーザーネームです</p>-->
     </div>
     
     <div class="form-group">
-      <label>年代</label><br>
+      <b><label>年代</label></b><br>
       <label><%= f.radio_button :age, "10歳代" %>10歳代</label>
       <label><%= f.radio_button :age, "20歳代" %>20歳代</label>
       <label><%= f.radio_button :age, "30歳代" %>30歳代</label>
@@ -21,38 +22,42 @@
     </div>
     
     <div class="form-group">
-      <label>性別</label>
+      <b><label>性別</label></b>
       <br>
       <label><%= f.radio_button :sex, "男性" %>男性</label>
       <label><%= f.radio_button :sex, "女性" %>女性</label>
     </div>
     
-    <div class="form-group">
-      <label>居住エリア（郵便番号から検索）</label>
+    <div class="form-group" id="address">
+      <b><label>居住エリア（郵便番号から検索）</label></b>
       <br>
-      <input type="text" id="postcode" maxlength="8" placeholder="例:0000000">
+      <input type="text" id="postcode" maxlength="8" placeholder="例:0000000 「-」不要">
       <button id="btn">入力</button>
+      <br>
+      <div class="balloon1-top" style="width:200px;">
+      <p>住所が自動入力されます</p>
+      </div>
     </div>
     
     <div class="form-group hide open">
-      <%= f.label :prefucture, value="住所（都道府県）" %>
+      <b><%= f.label :prefucture, value="住所（都道府県）" %></b>
       <%= f.text_field :prefucture, id: 'pref', class: 'form-control', placeholder: '郵便番号から自動入力' %>
     </div>
     
     <div class="form-group hide open">
-      <%= f.label :city, value="住所（市区町村）" %>
+      <b><%= f.label :city, value="住所（市区町村）" %></b>
       <%= f.text_field :city, id: 'city', class: 'form-control', placeholder: '郵便番号から自動入力' %>
     </div>
     
     <div class="form-group">
-      <label>分類</label><br>
+      <b><label>分類</label></b><br>
       <label><%= f.radio_button :classification, "介護者" %>介護者</label>
       <label><%= f.radio_button :classification, "被介護者" %>被介護者</label>
       <label><%= f.radio_button :classification, "医療職" %>医療職</label>
     </div>
     
     <div class="form-group">
-      <label>介護の対象</label><br>
+      <b><label>介護の対象</label></b><br>
       <label><%= f.radio_button :nursing, "実父" %>実父</label>
       <label><%= f.radio_button :nursing, "実母" %>実母</label>
       <label><%= f.radio_button :nursing, "義父" %>義父</label>
@@ -66,39 +71,61 @@
     </div>
     
     <div class="form-group">
-      <%= f.label :status, value="現状（プロフィール）" %>
+      <b><%= f.label :status, value="現状（プロフィール）" %></b>
       <%= f.text_area :status, class: 'form-control', rows: "5" %>
     </div>
     
-    <div class="form-group">
-      <%= f.label :key_word1, value="情報交換したい項目" %>
-      <%= f.text_field :key_word1, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label :key_word2, value="情報交換したい項目" %>
-      <%= f.text_field :key_word2, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group">
-      <%= f.label :key_word3, value="情報交換したい項目" %>
-      <%= f.text_field :key_word3, class: 'form-control' %>
+    <div id="key_word">
+      <div class="form-group">
+        <b><%= f.label :key_word1, value="情報交換したい項目１" %></b>
+        <%= f.text_field :key_word1, class: 'form-control', placeholder: "例：認知症" %>
+      </div>
+      
+      <div class="form-group">
+        <b><%= f.label :key_word2, value="情報交換したい項目２" %></b>
+        <%= f.text_field :key_word2, class: 'form-control', placeholder: "例：介護疲れ" %>
+      </div>
+      
+      <div class="form-group">
+        <b><%= f.label :key_word3, value="情報交換したい項目３" %></b>
+        <%= f.text_field :key_word3, class: 'form-control', placeholder: "例：難病" %>
+      </div>
+      
+      <div class="balloon1-top">
+        <p>
+        あなたが情報交換したい内容を記載してください。
+        <br>
+        情報交換をしやすくする検索ワードです。
+        <br>
+        項目1は必ず入力してください
+        </p>
+      </div>
     </div>
   
-    <div class="form-group">
-      <%= f.label :answer_digest, value="好きな食べ物" %><span class="red">※ログインに必要な質問の答え </span >
-      <%= f.text_field :answer_digest, class: 'form-control' %>
+    <div class="form-group" id="answer">
+      <b><%= f.label :answer_digest, value="好きな食べ物" %></b>
+      <%= f.text_field :answer_digest, class: 'form-control', placeholder: "※ログインに必要な質問の答え " %>
+      <div class="balloon1-top">
+        <p>ログイン時の質問の答えは漢字やカタカナ、
+        半角文字など上記の記載に完全に一致するようにしてください。</p>
+      </div>
     </div>
     
-    <%= f.label :profile_image, value="プロフィール画像"%>
+    <b><%= f.label :profile_image, value="プロフィール画像"%></b>
     <br>
     <%= f.file_field :profile_image, accept: 'image/jpeg,image/gif,image/png' %>
     
-      <%= f.file_field :profile_image, value: 'icon.png', class: 'hide', accept: 'image/jpeg,image/gif,image/png' %>
+    <!--<%= f.file_field :profile_image, value: 'icon.png', class: 'hide', accept: 'image/jpeg,image/gif,image/png' %>-->
     <br>
     <br>
     
-    <%= f.submit "新規登録", class: "btn btn-primary btn-lg" %>
+    <div style="text-align:center;" id="sign">
+      <%= f.submit "新規登録", class: "btn1" %>
+      <div class="balloon1-top">
+        <p>登録内容はいつでもメニューの登録情報の更新から変更できます。</p>
+      </div>
+    </div>
+    
   <% end %>
 </div>
 
@@ -127,4 +154,49 @@ $(function(){
     $('#city').val(data.address2);
   }
 });
+
+$("#address").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+
+$("#key_word").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+
+$("#answer").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+
+$("#sign").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+
 </script>

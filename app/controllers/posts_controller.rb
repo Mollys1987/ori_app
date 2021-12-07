@@ -64,9 +64,70 @@ class PostsController < ApplicationController
     p 'des_end========================='
   end
   
+  def pic_des1
+    p 'des_start========================='
+    @post = Post.find_by(id: params[:id])
+    @post.remove_picture1!
+    @post.save
+    flash[:success] = "写真１を削除しました"
+    redirect_to p_edit_path(@post.id)
+    p 'des_end========================='
+  end
+  
+  def pic_des2
+    p 'des_start========================='
+    @post = Post.find_by(id: params[:id])
+    @post.remove_picture2!
+    @post.save
+    flash[:success] = "写真２を削除しました"
+    redirect_to p_edit_path(@post.id)
+    p 'des_end========================='
+  end
+  
+  def pic_des3
+    p 'des_start========================='
+    @post = Post.find_by(id: params[:id])
+    @post.remove_picture3!
+    @post.save
+    flash[:success] = "写真３を削除しました"
+    redirect_to p_edit_path(@post.id)
+    p 'des_end========================='
+  end
+  
+  def pic_des4
+    p 'des_start========================='
+    @post = Post.find_by(id: params[:id])
+    @post.remove_picture4!
+    @post.save
+    flash[:success] = "写真４を削除しました"
+    redirect_to p_edit_path(@post.id)
+    p 'des_end========================='
+  end
+  
+  def pic_des5
+    p 'des_start========================='
+    @post = Post.find_by(id: params[:id])
+    @post.remove_picture5!
+    @post.save
+    flash[:success] = "写真５を削除しました"
+    redirect_to p_edit_path(@post.id)
+    p 'des_end========================='
+  end
+  
+  def mov_des
+    p 'des_start========================='
+    @post = Post.find_by(id: params[:id])
+    @post.remove_video!
+    @post.save
+    flash[:success] = "動画を削除しました"
+    redirect_to p_edit_path(@post.id)
+    p 'des_end========================='
+  end
+  
   private
     def post_params
-      params.require(:post).permit(:title, :content, :user_id, :picture, :video,
+      params.require(:post).permit(:title, :content, :user_id, :picture1, :picture2,
+                                   :picture3, :picture4, :picture5, :video,
                                    :key_word1, :key_word2, :key_word3, :key_word4,
                                    :key_word5)
     end

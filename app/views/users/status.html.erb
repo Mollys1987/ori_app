@@ -1,9 +1,73 @@
-<%= render 'shared/stats' %>
-
-<section class="stats">
-    <h3>お気に入りしている投稿</h3>
-      <% @user.liked_posts.each do |post| %>
-        <%= link_to post.user.nickname, u_show_path(post.user.id) %>
-        <%= link_to post.title, p_show_path(post.id)%>
+<div class="container" style="margin-top: 15px">
+  <h3 class="title"><%= @user.nickname %></h3>
+    <p class="title">さんのお気に入り</p>
+    <div style="margin-bottom:30px;"></div>
+    
+    <h4 class="title">お気に入りユーザー一覧</h4>
+      <% @users.each do |user| %>
+        <div class="card space">
+          <div class="card-header">
+            <% if user.profile_image? %>
+              <%= image_tag user.profile_image.url, class: "rounded-circle", size: "30x30" %>
+            <% else %>
+              <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
+            <% end %>
+            <%= link_to user.nickname, u_show_path(user.id) %>
+          </div>
+          <div class="card-body">
+            <b>年代：</b><%= user.age %> <span class="space2"><b>性別：</b><%= user.sex %></span>
+            <br>
+            <b>居住エリア：</b><%= user.prefucture %>
+            <br>
+            <b>分類：</b><%= user.classification %>
+            <br>
+            <b>情報交換キーワード：</b>
+            <br>
+            <%= "#1.#{user.key_word1}" %>&emsp; <%= "#2.#{user.key_word2}" %>&emsp; <%= "#3.#{user.key_word3}" %>&emsp;
+            <br>
+          </div>
+        </div>
       <% end %>
-    </section>
+    <%= paginate @like_users %>
+    <% if @users == [] %>
+      <p style="margin-top:10%; text-align:center;">まだお気に入り登録している
+      <br>ユーザーがいません</p>
+    <% end %>
+    
+  <div style="margin-bottom:30px;"></div>
+  <hr>
+  <div style="margin-bottom:30px;"></div>
+  
+    <h4 class="title">お気に入り投稿一覧</h4>
+      <% @user.liked_posts.each do |post| %>
+        <div class="card">
+          <div class="card-header">
+            <% if post.user.profile_image? %>
+              <%= image_tag post.user.profile_image.url, class: "rounded-circle", size: "30x30" %>
+            <% else %>
+              <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
+            <% end %>
+            <%= link_to post.user.nickname, u_show_path(post.user.id) %>
+          </div>
+          <div class="card-body">
+            <b>タイトル：</b><%= link_to post.title, p_show_path(post.id) %>
+            <br>
+            <br>
+            <b>検索キーワード：</b>
+            <br>
+            <%= "#1.#{post.key_word1}" %>&emsp; <%= "#2.#{post.key_word2}" %>&emsp; <%= "#3.#{post.key_word3}" %>&emsp;
+            <%= "#4.#{post.key_word4}" %>&emsp; <%= "#5.#{post.key_word5}" %>&emsp;
+            <br>
+            <br>
+            <b>投稿日時：</b><%= post.created_at.to_s(:datetime_jp) %>
+            <br>
+          </div>
+        </div>
+      <% end %>
+    <%= paginate @like_posts %>
+    <% if @user.liked_posts == [] %>
+      <p style="margin-top:10%; text-align:center;">まだお気に入り登録している
+      <br>投稿がありません</p>
+    <% end %>
+    
+</div>

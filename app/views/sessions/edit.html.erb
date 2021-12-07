@@ -1,13 +1,18 @@
 <div class="container" style="margin-top: 15px">
+  <h3 class="title">ログイン情報の更新</h3>
   <%= form_for(:session, url: log_upd_path, method: :patch) do |f| %>
     
-    <div class="form-group">
+    <div class="form-group" id="nickname">
       <%= f.label :ニックネーム %>
-      <%= f.text_field :nickname, class: 'form-control' %>
+      <%= f.text_field :nickname, class: 'form-control', placeholder: "登録のニックネームを入力" %>
+      <div class="balloon1-top">
+        <p>漢字やカタカナ、半角文字など登録時の記載に完全に一致するようにしてください。</p>
+      </div>
     </div>
     
-    <div class="form-group">
-      <label>年代</label><br>
+    <div class="form-group" id="age">
+      <label>年代</label>
+      <br>
       <label><%= f.radio_button :age, "10歳代" %>10歳代</label>
       <label><%= f.radio_button :age, "20歳代" %>20歳代</label>
       <label><%= f.radio_button :age, "30歳代" %>30歳代</label>
@@ -17,28 +22,106 @@
       <label><%= f.radio_button :age, "70歳代" %>70歳代</label>
       <label><%= f.radio_button :age, "80歳代" %>80歳代</label>
       <label><%= f.radio_button :age, "90歳代" %>90歳代</label>
+      <div class="balloon1-top">
+        <p>※登録時の年代をチェック</p>
+      </div>
     </div>
     
-    <div class="form-group">
+    <div class="form-group" id="sex">
       <label>性別</label>
       <br>
       <label><%= f.radio_button :sex, "男性" %>男性</label>
       <label><%= f.radio_button :sex, "女性" %>女性</label>
+      <div class="balloon2-top" style="width:218px;">
+        <p>※登録時の性別をチェック</p>
+      </div>
     </div>
     
-    <div class="form-group">
-      <%= f.label :city, value="住所（市区町村）" %><span class="red">※市区町村まで記載してください（○○区、○○市、○○村など）</span> 
-      <%= f.text_field :city, id: 'city', class: 'form-control'  %>
+    <div class="form-group" id="address">
+      <%= f.label :city, value="住所（市区町村）" %>
+      <%= f.text_field :city, id: 'city', class: 'form-control', placeholder: "○○区、○○市、○○村など" %>
+      <div class="balloon1-top">
+        <p>※登録時の市区町村のみを記載してください</p>
+      </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :answer_digest, value="好きな食べ物はなんですか？" %><span class="red">※漢字やカタカナなど統一した記載にしてください</span>
-      <%= f.text_field :answer_digest, class: 'form-control' %>
+    <div class="form-group" id="answer">
+      <%= f.label :answer_digest, value="好きな食べ物はなんですか？" %>
+      <!--<br><span class="red">※漢字やカタカナなど統一した記載にしてください</span>-->
+      <%= f.text_field :answer_digest, class: 'form-control', placeholder: "新しい質問の答えを入力" %>
+      <div class="balloon1-top">
+        <p>質問の答えは漢字やカタカナ、
+        半角文字など上記の記載に完全に一致するようにしてください。</p>
+      </div>
     </div>
     
-      <%= f.submit "ログイン", class: "btn btn-primary btn-lg" %>
+    <div style="text-align:center;">
+      <%= f.submit "ログイン", class: "btn1" %>
+    </div>
+      
   <% end %>
-
-  <h2>まだ登録していない</h2>
-  <%= link_to "新規登録", u_new_path %>
+  <div style="margin-bottom:50px;"></div>
+  <div class="title">
+    <hr>
+    まだ登録していない
+    <br>
+    <button class="btn1"><%= link_to "新規登録", u_new_path, style: "text-decoration:none; color:gray;" %></button>
+  </div>
 </div>
+
+<script>
+$("#nickname").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+
+$("#age").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+
+$("#sex").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon2-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon2-top").fadeOut();
+      }
+  );
+});
+
+$("#address").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+
+$("#answer").each(function() {
+  $(this).hover(
+      function() {
+          $(this).children(".balloon1-top").fadeIn();
+      },
+      function() {
+          $(this).children(".balloon1-top").fadeOut();
+      }
+  );
+});
+</script>

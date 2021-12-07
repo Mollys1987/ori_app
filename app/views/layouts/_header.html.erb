@@ -1,6 +1,6 @@
 <nav class="head-nav navbar navbar-light" style="padding: 0px">
   <% if logged_in? %>
-    <div style="padding-left: 25px;">
+    <div style="padding-left: 25px; height: 53px;padding-top: 13px;">
       <% if current_user.profile_image? %>
         <%= image_tag current_user.profile_image.url, class: "rounded-circle", size: "30x30" %>
       <% else %>
@@ -15,7 +15,7 @@
         <% end %>
     </div>
   <% else %>
-    <a class="navbar-brand" href="/" style="padding-left: 25px;">つながり</a>
+    <a class="navbar-brand" href="/" style="padding-left: 25px; padding-bottom: 0px;"><p style="margin-top:8px; margin-bottom:13px;">つながり</p></a>
   <% end %>
     
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="margin-right:25px; outline:1px auto gray;">
@@ -23,13 +23,13 @@
   </button>
   <div class="toggle-color navbar-collapse collapse" id="navbarNavAltMarkup">
     <% if logged_in? %>
-    <div class="navbar-nav nav-position">
-      <%= link_to "#{current_user.nickname}さんのプロフィール", u_show_path(current_user), class: "nav-item nav-link first-line nav-padi" %>
+    <div class="navbar-nav nav-position first-line">
+      <%= link_to "#{current_user.nickname}さんのプロフィール", u_show_path(current_user), class: "nav-item nav-link nav-padi" %>
       <%= link_to "ユーザー一覧", u_index_path, class: "nav-item nav-link nav-padi" %>
       <%= link_to "新規投稿", p_new_path, class: "nav-item nav-link nav-padi" %>
       <%= link_to "投稿一覧", p_index_path, class: "nav-item nav-link nav-padi" %>
       <%= link_to "お気に入りユーザーの投稿一覧", p_like_path, class: "nav-item nav-link nav-padi" %>
-      <%= link_to "ユーザー情報更新", u_edit_path(current_user), class: "nav-item nav-link nav-padi" %>
+      <%= link_to "登録情報の更新", u_edit_path(current_user), class: "nav-item nav-link nav-padi" %>
       <%= link_to "運営への問い合わせ", consultation_path, class: "nav-item nav-link nav-padi" %>
       <%= link_to "ログアウト", logout_path, method: :delete, class: "nav-item nav-link nav-padi" %>
     </div>

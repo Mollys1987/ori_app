@@ -52,6 +52,9 @@ class UsersController < ApplicationController
   
   def status
     @user = User.find(params[:id])
+    @users = @user.following
+    @like_users = Kaminari.paginate_array(@users).page(params[:page]).per(5)
+    @like_posts = Kaminari.paginate_array(@user.liked_posts).page(params[:page]).per(5)
   end
 
   def following

@@ -1,14 +1,14 @@
 User.create!(nickname: "管理人",
             age: "90歳代",
-            sex: "神",
+            sex: "男性",
             prefucture: "天国",
             city: "天国",
             classification: "なし",
             nursing: "なし",
             status: "テスト",
-            key_word1: "",
-            key_word2: "",
-            key_word3: "",
+            key_word1: "ppp",
+            key_word2: "ppp",
+            key_word3: "ppp",
             answer_digest: BCrypt::Password.create("つぶがい"),
             admin: true
             )
@@ -62,6 +62,7 @@ end
     Post.create!(
       title: "テスト#{n + 1}",
       content: "テスト文章#{n + 1}",
+      key_word1: "介護疲れ",
       user_id: 2
     )
 end

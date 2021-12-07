@@ -4,7 +4,11 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :content
       t.integer :user_id
-      t.string :picture
+      t.string :picture1
+      t.string :picture2
+      t.string :picture3
+      t.string :picture4
+      t.string :picture5
       t.string :video
       t.string :key_word1
       t.string :key_word2

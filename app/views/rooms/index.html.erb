@@ -1,43 +1,109 @@
-<h1>メッセージルーム</h1>
-  <h2>ユーザー検索</h2>
-    <%= form_with url: room_path, method: :get, local: true do |f| %>
-      <%= f.text_field :nickname %>
-      <%= f.submit :search %>
-    <% end %>
-    <table>
-      <thead>
-        <tr>
-          <th>検索結果</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <% if user.nickname != current_user.nickname && user.id != 1 %>
-              <td><%= link_to(user.nickname, chat_path(sender_id: current_user.id, receiver_id: user.id)) %></td>
+<h3 class="title">メッセージルーム</h3>
+
+  <h4 class="title">メッセージ履歴</h4>
+      <% @rooms.each do | room | %>
+        <div class="card">
+          <div class="card-header">
+            <% if @user.id == room.receiver.id %>
+              <% if room.sender.profile_image? %>
+                <%= image_tag room.sender.profile_image.url, class: "rounded-circle", size: "30x30" %>
+                <%= link_to "#{room.sender.nickname}さんとのメッセージ", exist_room_path(room.id) %>
+              <% else %>
+                <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
+                <%= link_to "#{room.sender.nickname}さんとのメッセージ", exist_room_path(room.id) %>
+              <% end %>
+            <% else %>
+              <% if room.sender.profile_image? %>
+                <%= image_tag room.receiver.profile_image.url, class: "rounded-circle", size: "30x30" %>
+                <%= link_to "#{room.receiver.nickname}さんとのメッセージ", exist_room_path(room.id) %>
+              <% else %>
+                <%= image_tag "icon.png", class: "rounded-circle", size: "30x30", style: "border: 3px solid black;" %>
+                <%= link_to "#{room.receiver.nickname}さんとのメッセージ", exist_room_path(room.id) %>
+              <% end %>
             <% end %>
-          </tr>
-        <% end %>
-        <% if @users.empty? %>
-          <td>一致する検索結果がありませんでした</td>
-        <% end %>
-      </tbody>
-    </table>
- 
-<h2>メッセージ履歴</h2>
-<ul>
-  <% @rooms.each do | room | %>
-    <li>
-      <% if @user.id == room.receiver.id %>
-        <%= link_to "#{room.sender.nickname}さんとのメッセージ", exist_room_path(room.id) %>
-      <% else %>
-        <%= link_to "#{room.receiver.nickname}さんとのメッセージ", exist_room_path(room.id) %>
+            <br>
+            <div class="posi-r">
+              <%= link_to "履歴の削除", room_des_path(room.id), method: :delete %>
+            </div>
+          </div>
+        </div>
       <% end %>
-      <br>
-      <%= link_to "履歴の削除", room_des_path(room.id), method: :delete %>
-    </li>
-  <% end %>
-  <% if @rooms.empty? %>
-     <li>メッセージの履歴がありません</li>
-   <% end %>
-</ul>
+      <% if @rooms.empty? %>
+        <b><p class="title" style="margin-top:8%;">メッセージの履歴がありません</p></b>
+      <% end %>
+ 
+  <hr style="margin:30px 0px;">
+  
+  <h4 class="title">ユーザー検索</h4>
+    <div id="u_search" class="s_window">
+      <input type="text" name="nickname" placeholder="ニックネームを入力" id="nickname" oninput="input_check()"/>
+      <button id="search_nickname" disabled>検索</button>
+      <div id="nickname_result"></div>
+    </div>
+ 
+
+<script>
+function input_check(){
+  let nickname = document.getElementById("nickname").value.length;
+  
+  if(nickname >= 1){
+    document.getElementById("search_nickname").removeAttribute("disabled");
+  }else{
+    document.getElementById("search_nickname").setAttribute("disabled", true);
+  }
+}
+
+$(document).on('turbolinks:load', (function(){
+      $('#search_nickname').click(function(){
+        let nickname = $('#nickname').val();
+        $.ajax({
+          type: 'GET',
+          url: '/result',
+          data: {nickname: nickname},
+          dataType: 'json'
+        })
+        .done(function(data){
+          nic_check(data.users)
+        　
+        　$.each(data.users, function(index,val){
+            $('.result').append(
+              (nic_result(val))
+            )
+          })
+          console.log(data.users);
+        })
+      })
+    }))
+    
+var nic_check = (data) => {
+    if (data.length === 0) {
+      $('#nickname_p').remove()
+      $('.result').remove()
+      $('#nickname_result').append('<p id="nickname_p" style="margin-top:16px;">ニックネーム検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
+    } else {
+      $('#nickname_p').remove()
+      $('.result').remove()
+      $('#nickname_result').append('<p id="nickname_p" style="margin-top:16px;">ニックネーム検索結果</p>');
+      $('#nickname_result').append('<div class="result"></div>');
+    }
+  }
+  
+var nic_result = (val) => {
+    console.log(val)
+    if (val !== null && val.id !== 1){
+    return $('<div class="card" style="margin-bottom:10px;">')
+          .append(`<div class="card-header">${prof_pic(val)}</div>`)
+          .append('</div>')
+    } 
+  }
+
+var prof_pic = (val) => {
+      console.log(val)
+      if(val.profile_image.url !== null){
+        return `<img src="${val.profile_image.url}" class="rounded-circle" width="30px" height="30px"><a href="user/show/${val.id}">${val.nickname}</a>`
+      }else{
+        return `<img src="/assets/icon.png" alt="写真なしのアイコン" class="rounded-circle" width="30px" height="30px"><a href="user/show/${val.id}">${val.nickname}</a>`
+      }
+    }
+  
+</script>

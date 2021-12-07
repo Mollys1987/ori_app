@@ -7,13 +7,21 @@ class Post < ApplicationRecord
     has_many :notifications, dependent: :destroy
     
     default_scope -> { order(created_at: :desc) }
-    mount_uploader :picture, PictureUploader
+    mount_uploader :picture1, PictureUploader
+    mount_uploader :picture2, PictureUploader
+    mount_uploader :picture3, PictureUploader
+    mount_uploader :picture4, PictureUploader
+    mount_uploader :picture5, PictureUploader
     mount_uploader :video, VideoUploader
     validates :title, presence: true, length: { maximum: 50 }
     validates :content, presence: true, length: { maximum: 255 }
     validates :key_word1, presence: { message: 'は１つは入力してください。' }
     validates :user_id, presence: true
-    validate  :picture_size
+    validate :picture_size1
+    validate :picture_size2
+    validate :picture_size3
+    validate :picture_size4
+    validate :picture_size5
     
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
@@ -61,9 +69,33 @@ class Post < ApplicationRecord
     private
 
     # アップロードされた画像のサイズをバリデーションする
-    def picture_size
-      if picture.size > 5.megabytes
-        errors.add(:picture, "should be less than 5MB")
+    def picture_size1
+      if picture1.size > 5.megabytes  
+        errors.add(:picture1, "の容量が5MBを超えているため投稿できません。")
+      end
+    end
+    
+    def picture_size2
+      if picture2.size > 5.megabytes  
+        errors.add(:picture2, "の容量が5MBを超えているため投稿できません。")
+      end
+    end
+    
+    def picture_size3
+      if picture3.size > 5.megabytes  
+        errors.add(:picture3, "の容量が5MBを超えているため投稿できません。")
+      end
+    end
+    
+    def picture_size4
+      if picture4.size > 5.megabytes  
+        errors.add(:picture4, "の容量が5MBを超えているため投稿できません。")
+      end
+    end
+    
+    def picture_size5
+      if picture5.size > 5.megabytes  
+        errors.add(:picture5, "の容量が5MBを超えているため投稿できません。")
       end
     end
 end

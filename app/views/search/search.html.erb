@@ -1,3 +1,4 @@
+<h3 class="title">検索機能</h3>
 <div class="search">
   <button id="u_btn" class="s_btn">ニックネーム検索</button>
   <button id="c_btn" class="s_btn">居住エリア検索</button>
@@ -227,11 +228,11 @@ var nic_check = (data) => {
     if (data.length === 0) {
       $('#nickname_p').remove()
       $('.result').remove()
-      $('#nickname_result').append('<p id="nickname_p">ニックネーム検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
+      $('#nickname_result').append('<p id="nickname_p" style="margin-top:16px;">ニックネーム検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
     } else {
       $('#nickname_p').remove()
       $('.result').remove()
-      $('#nickname_result').append('<p id="nickname_p">ニックネーム検索結果</p>');
+      $('#nickname_result').append('<p id="nickname_p" style="margin-top:16px;">ニックネーム検索結果</p>');
       $('#nickname_result').append('<div class="result"></div>');
     }
   }
@@ -278,11 +279,11 @@ var city_check = (data) => {
     if (data.length === 0) {
       $('#city_p').remove()
       $('.result').remove()
-      $('#city_result').append('<p id="city_p">居住エリア検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
+      $('#city_result').append('<p id="city_p" style="margin-top:16px;">居住エリア検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
     } else {
       $('#city_p').remove()
       $('.result').remove()
-      $('#city_result').append('<p id="city_p">居住エリア検索結果</p>');
+      $('#city_result').append('<p id="city_p" style="margin-top:16px;">居住エリア検索結果</p>');
       $('#city_result').append('<div class="result"></div>');
     }
   }
@@ -330,11 +331,11 @@ $(document).on('turbolinks:load', (function(){
     if (data.length === 0) {
       $('#key_p').remove()
       $('.result').remove()
-      $('#key_result').append('<p id="key_p">情報交換キーワード検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
+      $('#key_result').append('<p id="key_p" style="margin-top:16px;">情報交換キーワード検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
     } else {
       $('#key_p').remove()
       $('.result').remove()
-      $('#key_result').append('<p id="key_p">情報交換キーワード検索結果</p>');
+      $('#key_result').append('<p id="key_p" style="margin-top:16px;">情報交換キーワード検索結果</p>');
       $('#key_result').append('<div class="result"></div>');
     }
   }
@@ -394,11 +395,11 @@ var title_check = (data) => {
     if (data.length === 0) {
       $('#title_p').remove()
       $('.result').remove()
-      $('#title_result').append('<p id="title_p">投稿タイトル検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
+      $('#title_result').append('<p id="title_p" style="margin-top:16px;">投稿タイトル検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
     } else {
       $('#title_p').remove()
       $('.result').remove()
-      $('#title_result').append('<p id="title_p">投稿タイトル検索結果</p>');
+      $('#title_result').append('<p id="title_p" style="margin-top:16px;">投稿タイトル検索結果</p>');
       $('#title_result').append('<div class="result"></div>');
     }
   }
@@ -446,11 +447,11 @@ var p_key_check = (data) => {
     if (data.length === 0) {
       $('#p_key_p').remove()
       $('.rsult').remove()
-      $('#p_key_result').append('<p id="p_key_p">投稿の検索キーワード検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
+      $('#p_key_result').append('<p id="p_key_p" style="margin-top:16px;">投稿の検索キーワード検索結果<br><br><b>一致する検索結果がありませんでした</b></p>');
     } else {
       $('#p_key_p').remove()
       $('.result').remove()
-      $('#p_key_result').append('<p id="p_key_p">投稿の検索キーワード検索結果</p>');
+      $('#p_key_result').append('<p id="p_key_p" style="margin-top:16px;">投稿の検索キーワード検索結果</p>');
       $('#p_key_result').append('<div class="result"></div>');
     }
   }

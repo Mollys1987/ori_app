@@ -90,6 +90,8 @@ ja:
     attributes:
       user:
         nickname: ニックネーム
+        age: 年代
+        sex: 性別
         prefucture: 都道府県
         city: 市町村
         classification: 分類
@@ -102,3 +104,8 @@ ja:
         title: タイトル
         content: 投稿内容
         key_word1: 検索キーワード
+        picture1: 写真１
+        picture2: 写真２
+        picture3: 写真３
+        picture4: 写真４
+        picture5: 写真５

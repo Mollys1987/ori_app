@@ -1,12 +1,12 @@
-<h3>
+<h3 class="title">
   <% if @room %>
     <% if @room.receiver.id == current_user.id %>
-      <%= @room.sender.nickname %>さん<br>とのメッセージ
+      <%= @room.sender.nickname %><br>さんとのメッセージ
     <% else %>
-      <%= @room.receiver.nickname %>さん<br>とのメッセージ
+      <%= @room.receiver.nickname %><br>さんとのメッセージ
     <% end %>
   <% else %>
-    <%= @receiver.nickname %>さん<br>とのメッセージ
+    <%= @receiver.nickname %><br>さんとのメッセージ
   <% end %>
 </h3>
 
@@ -55,10 +55,11 @@
       <% end %>
      </div>
   <% end %>
-<hr>
+
+<div class="form-fix">
 <div class="mes-form">
   <%= form_for(:message, url: m_send_path) do |form| %>
-    <%= form.text_area :content, id: "content", rows: "4", class: "form_textarea mb-4" %>
+    <%= form.text_area :content, id: "content", rows: "3", class: "form_textarea", style: "width:83%" %>
     <% if @room %>
       <%= form.text_field :room_id, class: "hidden hide", value: @room.id %>
     <% else %>
@@ -66,6 +67,7 @@
       <%= form.text_field :receiver_id, class: "hidden hide", value: @receiver.id %>
     <% end %>
     <br>
-    <%= form.submit "メッセージ送信", class: "btn_01" %>
+    <%= form.submit "メッセージ送信", class: "mes-btn" %>
   <% end %>
+</div>
 </div>
