@@ -32,7 +32,7 @@
               <p>写真１</p>
               <div class="pic-border">
                 <% if @post.picture1? %>
-                  <%= image_tag(@post.picture1.url, style: "max-width:400px;", style: "width:90%") %>
+                  <%= image_tag(@post.picture1.url, class: "resize2") %>
                 <% else %>
                   <p>写真１なし</p>
                 <% end %>
@@ -45,7 +45,7 @@
               <p>写真２</p>
               <div class="pic-border">
                 <% if @post.picture2? %>
-                  <%= image_tag(@post.picture2.url, style: "max-width:400px;", style: "width:90%") %>
+                  <%= image_tag(@post.picture2.url, class: "resize2") %>
                 <% else %>
                   <p>写真２なし</p>
                 <% end %>
@@ -58,7 +58,7 @@
               <p>写真３</p>
               <div class="pic-border">
                 <% if @post.picture3? %>
-                  <%= image_tag(@post.picture3.url, style: "max-width:400px;", style: "width:90%") %>
+                  <%= image_tag(@post.picture3.url, class: "resize2") %>
                 <% else %>
                   <p>写真３なし</p>
                 <% end %>
@@ -74,7 +74,7 @@
               <p>写真４</p>
               <div class="pic-border">
                 <% if @post.picture4? %>
-                  <%= image_tag(@post.picture4.url, style: "max-width:400px;", style: "width:90%") %>
+                  <%= image_tag(@post.picture4.url, class: "resize2") %>
                 <% else %>
                   <p>写真４なし</p>
                 <% end %>
@@ -87,7 +87,7 @@
               <p>写真５</p>
               <div class="pic-border">
                 <% if @post.picture5? %>
-                  <%= image_tag(@post.picture5.url, style: "max-width:400px;", style: "width:90%") %>
+                  <%= image_tag(@post.picture5.url, class: "resize2") %>
                 <% else %>
                   <p>写真５なし</p>
                 <% end %>
@@ -101,7 +101,7 @@
               <div class="pic-border">
                 <% if @post.video? %>
                   <%= link_to @post.video_url.to_s do %>
-                    <%= video_tag(@post.video.to_s, width: "100%", height: "100%") %>
+                    <%= video_tag(@post.video.to_s, class: "resize2") %>
                   <% end %>
                 <% else %>
                   <p>動画なし</p>
