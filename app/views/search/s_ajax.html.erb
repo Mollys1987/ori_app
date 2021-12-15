@@ -1,0 +1,175 @@
+  <button id="u_btn">ニックネーム検索</button>
+  <button id="c_btn">居住エリア検索</button>
+  <button id="key_btn">情報交換キーワード検索</button>
+  <button id="title_btn">投稿のタイトル検索</button>
+  
+  <div id="u_search" class="hide">
+    <input type="text" name="nickname" placeholder="ニックネームを入力" id="nickname" />
+    <button id="search_nickname">検索</button>
+    <div id="nickname_result"></div>
+  </div>
+    
+  <div id="c_search" class="hide">
+    <input type="text" name="city" placeholder="市町村を入力" id="city" />
+    <button id="search_city">検索</button>
+    <div id="city_result"></div>
+  </div>
+  
+  <div id="key_search" class="hide">
+    <input type="text" name="key" placeholder="情報交換キーワードを入力" id="key" />
+    <button id="search_key">検索</button>
+    <div id="key_result"></div>
+  </div>
+  
+  <div id="title_search" class="hide">
+    <input type="text" name="title" placeholder="投稿のタイトルを入力" id="title" />
+    <button id="search_title">検索</button>
+    <div id="title_result"></div>
+  </div>
+  
+<script>
+$('#u_btn').click(function() {
+        $('#c_search').fadeOut();
+        $('#key_search').fadeOut();
+        $('#title_search').fadeOut();
+        $('#u_search').fadeIn();
+    })
+    
+$('#c_btn').click(function() {
+        $('#u_search').fadeOut();
+        $('#key_search').fadeOut();
+        $('#title_search').fadeOut();
+        $('#c_search').fadeIn();
+    })
+  
+$('#key_btn').click(function() {
+        $('#u_search').fadeOut();
+        $('#c_search').fadeOut();
+        $('#title_search').fadeOut();
+        $('#key_search').fadeIn();
+    })
+
+$('#title_btn').click(function() {
+        $('#u_search').fadeOut();
+        $('#c_search').fadeOut();
+        $('#key_search').fadeOut();
+        $('#title_search').fadeIn();
+    })
+
+
+$(document).on('turbolinks:load', (function(){
+      $('#search_nickname').click(function(){
+        let nickname = $('#nickname').val();
+        $.ajax({
+          type: 'GET',
+          url: '/result',
+          data: {nickname: nickname},
+          dataType: 'json'
+        })
+        .done(function(data){
+          $('#nickname_p').remove()
+          $('#table_nickname').remove()
+          $('#nickname_result').append('<p id="nickname_p">ニックネーム検索結果</p>');
+          $('#nickname_result').append('<table id="table_nickname"></table>');
+        　
+        　$.each(data.users, function(index,val){
+            $('#table_nickname').append(
+              $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr></tr>')
+              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`)
+            
+            )
+          })
+          console.log(data.users)
+        })
+      })
+    }))
+
+$(document).on('turbolinks:load', (function(){
+      $('#search_city').click(function(){
+        let city = $('#city').val();
+        $.ajax({
+          type: 'GET',
+          url: '/result',
+          data: {city: city},
+          dataType: 'json'
+        })
+        .done(function(data){
+          $('#city_p').remove()
+          $('#table_city').remove()
+          $('#city_result').append('<p id="city_p">居住エリア検索結果</p>');
+          $('#city_result').append('<table id="table_city"></table>');
+        　
+        　$.each(data.cities, function(index,val){
+            $('#table_city').append(
+              $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr></tr>')
+              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`)
+              .append(`<td>${val.city}</td>`)
+            )
+          })
+          console.log(data.cities)
+        })
+      })
+    }))
+
+$(document).on('turbolinks:load', (function(){
+      $('#search_key').click(function(){
+        let key = $('#key').val();
+        $.ajax({
+          type: 'GET',
+          url: '/result',
+          data: {key: key},
+          dataType: 'json'
+        })
+        .done(function(data){
+          $('#key_p').remove()
+          $('#table_key').remove()
+          $('#key_result').append('<p id="key_p">投稿タイトル検索結果</p>');
+          $('#key_result').append('<table id="table_key"></table>');
+        　
+        　$.each(data.keies, function(index,val){
+            $('#table_key').append(
+              $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr></tr>')
+              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.id}">${val.nickname}</a></td>`)
+              .append(`<td>${val.key_word1}${val.key_word2}${val.key_word3}</td>`)
+            )
+          })
+          console.log(data.keies)
+        })
+      })
+    }))
+    
+$(document).on('turbolinks:load', (function(){
+      $('#search_title').click(function(){
+        let title = $('#title').val();
+        $.ajax({
+          type: 'GET',
+          url: '/result',
+          data: {title: title},
+          dataType: 'json'
+        })
+        .done(function(data){
+          $('#title_p').remove()
+          $('#table_title').remove()
+          $('#title_result').append('<p id="title_p">投稿タイトル検索結果</p>');
+          $('#title_result').append('<table id="table_title"></table>');
+        　
+        　$.each(data.titles, function(index,val){
+            $('#table_title').append(
+              $('<tbody></tbody>')
+              .append('<tr></tr>')
+              .append('<tr></tr>')
+              .append(`<td><img src="${val.profile_image.url}" width="20%"><a href="user/show/${val.user.id}">${val.user.nickname}</a></td>`)
+              .append(`<td><a href="/post_show/${val.id}">${val.title}</a></td>`)
+            )
+          })
+          console.log(data.titles)
+        })
+      })
+    }))
+</script>
